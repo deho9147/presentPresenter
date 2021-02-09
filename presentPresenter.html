@@ -1,0 +1,951 @@
+<body id="body">
+    <div id="leftSide" style="width:30%; border-right: solid black 2px; padding: 2px;">
+        <div style="font-size: 40px; padding: 20px; text-align: center; color: white;">Present Presenter</div>
+        <div>
+            <div style="font-size: 24px; color: white;">Top Message:</div>
+            <textarea id="topMessageInput" cols="30" rows="3"
+                style="margin: 20px; margin-top:10px; font-size: 20px; color: black; border-radius: 10px; resize: none; outline: none;">Open your Gift</textarea>
+        </div>
+        <div id="colorSelectors" style="color: white; font-size: 36px;">
+            Colors:
+            <div style="line-height: 40px; vertical-align: center; font-size: 24px; margin-left: 20px;">
+                <label for="boxColorPicker">Box:</label>
+                <input id="boxColorPicker" type="color" onchange="setColor(this)" value="#004d00"
+                    style="width: 100px; border-radius: 10px; background-color: #101010; border-color: #101010; margin-right: 10px;" />
+                <span>or</span>
+                <input id="boxColorHTML" type="text" onchange="setColor(this)" value="#004d00"
+                    style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; margin-left: 10px;">
+            </div>
+            <div style="line-height: 40px; vertical-align: center; font-size: 24px; margin-left: 20px;">
+                <label for="bowColorPicker">Bow:</label>
+                <input id="bowColorPicker" type="color" onchange="setColor(this)" value="#ff0000"
+                    style="width: 100px; border-radius: 10px; background-color: #101010; border-color: #101010; margin-right: 10px;" />
+                <span>or</span>
+                <input id="bowColorHTML" type="text" onchange="setColor(this)" value="#ff0000"
+                    style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; margin: 5px; margin-left: 10px;">
+            </div>
+        </div>
+        <div style="color:white; font-size:36px;">Questions:
+            <div id="listQuestions">
+                <div id="insideQuestions"></div>
+            </div>
+            <input id="createQuestionButton" type="button" onclick="createQuestion()" value="New Question"
+                style="font-size: 20px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 20px;" />
+            <div id="maxQuestions" hidden="true">You have reach the max amount of Questions</div>
+            <div id="createQuestionForm"></div>
+        </div>
+        <div id="gift" style="color: white; font-size: 24px;">
+            <div style="font-size: 36px; color: white; margin: 10px 10px 10px 0;">Inside</div>
+            <div style="margin-left: 20px;">
+                <input type="radio" id="useText" name="giftFormat" onchange="giftFormat(this)" value="Text">
+                <label for="useImage" style="margin:5px; font-size: 24px;">Text</label>
+                <input type="radio" id="useImage" name="giftFormat" onchange="giftFormat(this)" value="Image">
+                <label for="useImage" style="margin:5px; font-size: 24px;">Image</label>
+            </div>
+            <div id="giftImage" style="margin-left: 20px;" hidden="true">
+                <label for="imageInput" style="font-size: 24px; margin: 10px 10px 10px 0;">Add image:</label>
+                <input type="file" id="giftImageInput" accept="image/*" onchange="giftInputHandler(this)"
+                    style="margin: 10px 10px 10px 0;">
+            </div>
+            <div id="giftText" style="margin-left: 20px;">
+                <textarea id="giftTextInput" cols="30" rows="3"
+                    style="margin: 20px; margin-left: 0px; font-size: 20px; color: black; border-radius: 10px; resize: none; outline: none;">Here is your Gift</textarea>
+            </div>
+            <div style="margin-left: 20px;">
+                <label for="linkInput">Link: </label>
+                <input type="text" id="linkInput" onchange="addLink(this)" autocomplete="off"
+                    style="font-size: 20px; padding: 2px; padding-left: 5px; padding-right: 5px; border-radius: 10px; outline: none;">
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: column; margin-top: 40px;">
+            <input type="button" onclick="reRenderCube()" value="Reset Cube"
+                style="margin: 10px; margin-left: 0px; font-size: 24px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; width: 30%; outline: none;" />
+            <input type="button" onclick="downloadHTML()" value="Download"
+                style="font-size: 36px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 0px; width: 200px; outline: none;" />
+        </div>
+    </div>
+    <div id="rightSide" style="width:70%; text-align:center;">
+        <div id="boxStuffContainer" style = "background-color: #2d2d2d;">
+            <div style="width: 100%; align-content: center; display: flex; justify-content: center;">
+                <div id="topMessage"
+                    style="color: white; font-size: 40px; padding-top: 40px; width: 60%; text-align: center;">
+                </div>
+            </div>
+            <div id="downloadContent">
+                <div class="scene" style="position: relative; left: calc(50% - 320px);">
+                    <div class="cube">
+                        <div class="gift"
+                            style="position: absolute; top: -120px; left: 30px; transform: rotateX(90deg); text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+                            <div id="giftZone"
+                                style="width: 420px; height: 320px; font-size: 48px; color: white; display: flex; align-items: center; justify-content: center;">
+                            </div>
+                        </div>
+                        <div class="cube__face cube__face--front">
+                            <div class="bow">
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                </div>
+                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                                </div>
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cube__face cube__face--back">
+                            <div class="bow">
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                                </div>
+                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                                </div>
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cube__face cube__face--right">
+                            <svg height="480" width="480" style="position: absolute; left:0; top:0;">
+                                <line x1="3" y1="3" x2="477" y2="477" style="stroke: black;stroke-width:2;" />
+                                <line x1="3" y1="477" x2="477" y2="3" style="stroke: black;stroke-width:2;" />
+                                <line x1="240" y1="480" x2="240" y2=240 style="stroke: black;stroke-width:2;" />
+                            </svg>
+                            <div class="tape"
+                                style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:180px; top:190px;"
+                                onclick="askQuestion(this)">
+                            </div>
+                            <div class="bow">
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                                </div>
+                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                                </div>
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cube__face cube__face--left">
+                            <svg height="480" width="480" style="position: absolute; left:0; top:0;">
+                                <line x1="3" y1="3" x2="477" y2="477" style="stroke: black;stroke-width:2;" />
+                                <line x1="3" y1="477" x2="477" y2="3" style="stroke: black;stroke-width:2;" />
+                                <line x1="240" y1="480" x2="240" y2=240 style="stroke: black;stroke-width:2;" />
+                            </svg>
+                            <div class="tape"
+                                style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:180px; top:190px;"
+                                onclick="askQuestion(this)">
+                            </div>
+                            <div class="bow">
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                </div>
+                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                                </div>
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cube__face cube__face--top">
+                            <div class="bow">
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                </div>
+                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                                </div>
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                </div>
+                            </div>
+                            <div id="bowTop" onclick="askQuestion(this)">
+                                <div class="bowTail"
+                                    style="position: absolute; left: 120px; top: 192px; width: 100px; height: 200px; border-style: solid; border-width:  1px; transform: rotate(30deg);">
+                                </div>
+                                <div class="bowTail"
+                                    style="position: absolute; left: 250px; top: 190px; width: 100px; height: 200px; border-style: solid; border-width:1px; transform: rotate(-30deg);">
+                                </div>
+                                <div style="position: absolute; left: 60px; top: 60px;">
+                                    <div class="bowCenter"
+                                        style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                    </div>
+                                    <div class="bowEdge"
+                                        style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border-radius: 50%; background-color:transparent;">
+                                    </div>
+                                    <div class="bowEdge"
+                                        style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border-radius: 50%; background-color:transparent;">
+                                    </div>
+                                </div>
+                                <div style="position: absolute; left: 220px; top: 60px; transform: translateZ(300px);">
+                                    <div class="bowCenter"
+                                        style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                    </div>
+                                    <div class="bowEdge"
+                                        style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                    </div>
+                                    <div class="bowEdge"
+                                        style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cube__face cube__face--bottom">
+                            <svg height="480" width="480" style="position: absolute; left:0; top:0;">
+                                <line x1="0" y1="240" x2="480" y2="240" style="stroke: black;stroke-width:2;" />
+                            </svg>
+                            <div class="tape"
+                                style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:60px; top:190px;"
+                                onclick="askQuestion(this)">
+                            </div>
+                            <div class="tape"
+                                style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left: 300px; top:190px;"
+                                onclick="askQuestion(this)">
+                            </div>
+                            <div class="bow">
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                </div>
+                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                                </div>
+                                <div class="bowSection"
+                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="radio-group" style="color:white; width: 100%; text-align:center;">
+                    <label>
+                        <input type="radio" name="rotate-cube-side" value="front" /> FRONT
+                    </label>
+                    <label>
+                        <input type="radio" name="rotate-cube-side" value="right" /> RIGHT
+                    </label>
+                    <label>
+                        <input type="radio" name="rotate-cube-side" value="back" /> BACK
+                    </label>
+                    <label>
+                        <input type="radio" name="rotate-cube-side" value="left" /> LEFT
+                    </label>
+                    <label>
+                        <input type="radio" name="rotate-cube-side" value="top" checked /> TOP
+                    </label>
+                    <label>
+                        <input type="radio" name="rotate-cube-side" value="bottom" /> BOTTOM
+                    </label>
+                </p>
+                <div id="question_display"
+                    style="width: 100%; display:flex; align-items: center; flex-direction: column;">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const uneditedBox = `<div id="boxStuffContainer" style = "background-color: #2d2d2d;">
+        <div style="width: 100%; align-content: center; display: flex; justify-content: center;">
+            <div id="topMessage"
+                style="color: white; font-size: 40px; padding-top: 40px; width: 60%; text-align: center;">
+            </div>
+        </div>
+        <div id="downloadContent">
+            <div class="scene" style="position: relative; left: calc(50% - 320px);">
+                <div class="cube">
+                    <div class="gift"
+                        style="position: absolute; top: -120px; left: 30px; transform: rotateX(90deg); text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+                        <div id="giftZone"
+                            style="width: 420px; height: 320px; font-size: 48px; color: white; display: flex; align-items: center; justify-content: center;">
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--front">
+                        <div class="bow">
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                            </div>
+                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            </div>
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--back">
+                        <div class="bow">
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                            </div>
+                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            </div>
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--right">
+                        <svg height="480" width="480" style="position: absolute; left:0; top:0;">
+                            <line x1="3" y1="3" x2="477" y2="477" style="stroke: black;stroke-width:2;" />
+                            <line x1="3" y1="477" x2="477" y2="3" style="stroke: black;stroke-width:2;" />
+                            <line x1="240" y1="480" x2="240" y2=240 style="stroke: black;stroke-width:2;" />
+                        </svg>
+                        <div class="tape"
+                            style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:180px; top:190px;"
+                            onclick="askQuestion(this)">
+                        </div>
+                        <div class="bow">
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                            </div>
+                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            </div>
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--left">
+                        <svg height="480" width="480" style="position: absolute; left:0; top:0;">
+                            <line x1="3" y1="3" x2="477" y2="477" style="stroke: black;stroke-width:2;" />
+                            <line x1="3" y1="477" x2="477" y2="3" style="stroke: black;stroke-width:2;" />
+                            <line x1="240" y1="480" x2="240" y2=240 style="stroke: black;stroke-width:2;" />
+                        </svg>
+                        <div class="tape"
+                            style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:180px; top:190px;"
+                            onclick="askQuestion(this)">
+                        </div>
+                        <div class="bow">
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                            </div>
+                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            </div>
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--top">
+                        <div class="bow">
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                            </div>
+                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            </div>
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                            </div>
+                        </div>
+                        <div id="bowTop" onclick="askQuestion(this)">
+                            <div class="bowTail"
+                                style="position: absolute; left: 120px; top: 192px; width: 100px; height: 200px; border-style: solid; border-width:  1px; transform: rotate(30deg);">
+                            </div>
+                            <div class="bowTail"
+                                style="position: absolute; left: 250px; top: 190px; width: 100px; height: 200px; border-style: solid; border-width:1px; transform: rotate(-30deg);">
+                            </div>
+                            <div style="position: absolute; left: 60px; top: 60px;">
+                                <div class="bowCenter"
+                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                </div>
+                                <div class="bowEdge"
+                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border-radius: 50%; background-color:transparent;">
+                                </div>
+                                <div class="bowEdge"
+                                    style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border-radius: 50%; background-color:transparent;">
+                                </div>
+                            </div>
+                            <div style="position: absolute; left: 220px; top: 60px; transform: translateZ(300px);">
+                                <div class="bowCenter"
+                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                </div>
+                                <div class="bowEdge"
+                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                </div>
+                                <div class="bowEdge"
+                                    style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cube__face cube__face--bottom">
+                        <svg height="480" width="480" style="position: absolute; left:0; top:0;">
+                            <line x1="0" y1="240" x2="480" y2="240" style="stroke: black;stroke-width:2;" />
+                        </svg>
+                        <div class="tape"
+                            style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:60px; top:190px;"
+                            onclick="askQuestion(this)">
+                        </div>
+                        <div class="tape"
+                            style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left: 300px; top:190px;"
+                            onclick="askQuestion(this)">
+                        </div>
+                        <div class="bow">
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                            </div>
+                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            </div>
+                            <div class="bowSection"
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="radio-group" style="color:white; width: 100%; text-align:center;">
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="front" /> FRONT
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="right" /> RIGHT
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="back" /> BACK
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="left" /> LEFT
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="top" checked /> TOP
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="bottom" /> BOTTOM
+                </label>
+            </p>
+            <div id="question_display"
+                style="width: 100%; display:flex; align-items: center; flex-direction: column;">
+            </div>
+        </div>
+    </div>`
+</script>
+<script>
+    var passingData = {}
+    var questionList = []
+    function setData() {
+        passingData = {
+            ...passingData,
+            topMessage: document.getElementById("topMessageInput").value,
+            bowColor: document.getElementById("bowColorPicker").value,
+            boxColor: document.getElementById("boxColorPicker").value,
+            giftText: document.getElementById("giftTextInput").value,
+        }
+    }
+    function setColor(element) {
+        if (element.id === "boxColorHTML") {
+            if (/^#[0-9A-F]{6}$/i.test(element.value)) {
+                document.getElementById("boxColorPicker").value = element.value;
+            }
+        } else if (element.id === "boxColorPicker") {
+            document.getElementById("boxColorHTML").value = element.value;
+        } else if (element.id === "bowColorHTML") {
+            if (/^#[0-9A-F]{6}$/i.test(element.value)) {
+                document.getElementById("bowColorPicker").value = element.value;
+            }
+        } else if (element.id === "bowColorPicker") {
+            document.getElementById("bowColorHTML").value = element.value;
+        }
+    }
+    function reRenderCube() {
+        document.getElementById("downloadContent").remove();
+        document.getElementById("boxStuffContainer").innerHTML = uneditedBox;
+        questionCounter = 0;
+        passingData = { ...passingData, questions: questionList, }
+        setData();
+        addStyle();
+        var cube = document.querySelector('.cube');
+        var radioGroup = document.querySelector('.radio-group');
+        var currentClass = '';
+        function changeSide() {
+            var checkedRadio = radioGroup.querySelector(':checked');
+            var showClass = 'show-' + checkedRadio.value;
+            if (currentClass) {
+                cube.classList.remove(currentClass);
+            }
+            cube.classList.add(showClass);
+            currentClass = showClass;
+        }
+        // set initial side
+        changeSide();
+        radioGroup.addEventListener('change', changeSide);
+        updateData();
+    }
+    function createQuestion() {
+        document.getElementById("createQuestionButton").hidden = true;
+        var form = document.createElement("DIV");
+        form.submit = "false"
+        form.style = "margin: 20px;"
+        var questionText = document.createElement("LABEL");
+        questionText.setAttribute("for", "question")
+        questionText.style = "font-size:24px; color:white;"
+        questionText.textContent = "Question: ";
+        var question = document.createElement("INPUT");
+        question.onkeydown = "return event.key!='Enter'";
+        question.setAttribute("id", "question");
+        question.setAttribute("type", "text");
+        question.style = "font-size:20px; width: 70%; border-radius: 5px;"
+        var answerText = document.createElement("LABEL");
+        answerText.setAttribute("for", "answer");
+        answerText.style = "font-size:24px; color:white;";
+        answerText.textContent = "Answer: ";
+        var answer = document.createElement("INPUT");
+        answer.setAttribute("id", "answer");
+        answer.setAttribute("type", "text");
+        answer.style = "font-size:20px; width: 70%; border-radius: 5px;"
+        var hintText = document.createElement("LABEL");
+        hintText.setAttribute("for", "hint");
+        hintText.style = "font-size:24px; color:white;";
+        hintText.textContent = "Hint: ";
+        var hint = document.createElement("INPUT");
+        hint.setAttribute("id", "hint")
+        hint.setAttribute("type", "text");
+        hint.style = "font-size:20px; width: 70%; border-radius: 5px;"
+        var submit = document.createElement("INPUT");
+        submit.setAttribute("type", "submit");
+        submit.setAttribute("value", "Submit");
+        submit.style = "border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px;";
+        submit.onclick = function () {
+            if (questionList.length > 5) {
+                document.getElementById("maxQuestions").hidden = false;
+                document.getElementById("createQuestionButton").hidden = true;
+            } else {
+                document.getElementById("createQuestionButton").hidden = false;
+                if (question.value) {
+                    var newQuestion = { prompt: question.value, answer: answer.value, hint: hint.value }
+                    questionList.push(newQuestion);
+                }
+            }
+            form.remove();
+            listQuestions();
+        }
+        form.appendChild(questionText);
+        form.appendChild(question);
+        form.appendChild(document.createElement("br"))
+        form.appendChild(answerText);
+        form.appendChild(answer);
+        form.appendChild(document.createElement("br"))
+        form.appendChild(hintText);
+        form.appendChild(hint);
+        form.appendChild(document.createElement("br"))
+        form.appendChild(submit);
+        document.getElementById("createQuestionForm").appendChild(form);
+    }
+    function listQuestions() {
+        document.getElementById("insideQuestions").remove();
+        var insideQuestions = document.createElement("div");
+        insideQuestions.id = "insideQuestions";
+        for (var i = 0; i < questionList.length; i++) {
+            singleQuestion(insideQuestions, i);
+        }
+        document.getElementById("listQuestions").appendChild(insideQuestions);
+    }
+    function singleQuestion(insideQuestions, i) {
+        var fullQuestion = document.createElement("div");
+        fullQuestion.id = i;
+        //fullQuestion.textContent = (i + 1);
+        var question = document.createElement("div");
+        question.textContent = "Question " + (i + 1) + ": " + questionList[i].prompt;
+        question.style = "color: white; font-size: 24px; margin-top:10px; margin:5px; margin-left: 20px;";
+        var answer = document.createElement("div");
+        answer.textContent = "Answer: " + questionList[i].answer;
+        answer.style = "color: white; font-size: 24px; margin:5px; margin-left: 20px;";
+        var hint = document.createElement("div");
+        hint.textContent = "Hint: " + questionList[i].hint;
+        hint.style = "color: white; font-size: 24px; margin:5px; margin-left: 20px;";
+        var removeButton = document.createElement("input");
+        removeButton.value = "Remove";
+        removeButton.style = "padding:3px; font-size:12px; color: white; background-color: #101010; border-radius:5px; border: solid 1px white; margin: 5px; margin-left: 20px;";
+        removeButton.setAttribute("type", "button");
+        removeButton.onclick = function () {
+            if (questionList.length > 5) {
+                document.getElementById("createQuestionButton").hidden = false;
+                document.getElementById("maxQuestions").hidden = true;
+            }
+            questionList.splice(i, 1);
+            listQuestions();
+        }
+        fullQuestion.appendChild(question);
+        fullQuestion.appendChild(answer);
+        fullQuestion.appendChild(hint);
+        fullQuestion.appendChild(removeButton);
+        insideQuestions.appendChild(fullQuestion);
+    }
+    function giftFormat(element) {
+        if (element.value.toLowerCase() === "image") {
+            document.getElementById("giftImage").hidden = false;
+            document.getElementById("giftText").hidden = true;
+            passingData.giftIsImage = true;
+        } else {
+            document.getElementById("giftImage").hidden = true;
+            document.getElementById("giftText").hidden = false;
+            passingData.giftIsImage = false;
+        }
+    }
+    function giftInputHandler(element) {
+        if (element.id === "giftImageInput") {
+            const promise = new Promise((resolutionFunc, rejectionFunc) => {
+                var fileReader = new FileReader();
+                var srcData = undefined;
+                fileReader.onload = function (fileLoadedEvent) {
+                    srcData = fileLoadedEvent.target.result; // <--- data: base64
+                    resolutionFunc(srcData);
+                }
+                fileReader.readAsDataURL(element.files[0]);
+                //setTimeout(function(){resoltionFunc(srcData);},100);
+            });
+            promise.then(function (data) { passingData.giftImage = data });
+            passingData.giftIsImage = true;
+        } else {
+            passingData.giftText = element.value;
+        }
+    }
+    function getBase64Image(imgFile) {
+        var fileReader = new FileReader();
+
+        fileReader.onload = function (fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+            /*var newImage = document.createElement('img');
+            newImage.src = srcData;
+            document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+            //alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+            document.getElementById("divDynamic").innerHTML = newImage.src;
+
+            console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+            */
+            passingData.giftImage = srcData;
+            return srcData
+        } //End of fileReader.onload
+        return fileReader.readAsDataURL(imgFile);
+    }
+    //createQuestion();
+    function addLink(element) {
+        if (element.value) {
+            passingData = {
+                ...passingData,
+                link: element.value,
+            }
+        } else {
+            passingData = {
+                ...passingData,
+                link: undefined,
+            };
+        }
+        console.log(passingData)
+    }
+    function downloadHTML() {
+        var element = document.createElement('a');
+        var downloadText = uneditedBox + "<script> passingData =" + JSON.stringify(passingData) + "<" + "/script>" + "<script>" + document.getElementById("scriptDownLoad").innerHTML + "<" + "/script>" + '<style id="styleDownload">' + document.getElementById("styleDownload").innerHTML + "<" + "/style>";
+        element.setAttribute('href', 'data:html/plain;charset=utf-8,' + encodeURIComponent(downloadText));
+        element.setAttribute('download', "YourPresent.html");
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+    listQuestions();
+    setData();
+    reRenderCube();
+</script>
+<script id="scriptDownLoad">
+    var questions = passingData.questions;
+    function updateData() {
+        questions = passingData.questions;
+        questionCounter = 0;
+    }
+    var questionCounter = 0;
+    var cube = document.querySelector('.cube');
+    var radioGroup = document.querySelector('.radio-group');
+    var currentClass = '';
+
+    function changeSide() {
+        var checkedRadio = radioGroup.querySelector(':checked');
+        var showClass = 'show-' + checkedRadio.value;
+        if (currentClass) {
+            cube.classList.remove(currentClass);
+        }
+        cube.classList.add(showClass);
+        currentClass = showClass;
+    }
+    // set initial side
+    changeSide();
+    radioGroup.addEventListener('change', changeSide);
+
+    function askQuestion(object) {
+        if (questions[questionCounter]) {
+            if (!document.getElementById("answer_display")) {
+                var answerDisplay = document.createElement("div");
+                answerDisplay.id = "answer_display";
+                answerDisplay.style = "justify-content: center; width: 800px;"
+                var questionText = document.createElement("div");
+                questionText.textContent = questions[questionCounter].prompt;
+                questionText.style = "color: white; Font-size: 24px; padding-right: 10px; text-align: center;"
+                var hintButton = document.createElement("div");
+                hintButton.textContent = ("HINT")
+                hintButton.style = "background-color: black; color: white; font-size: 18px; padding: 2px; padding-left: 5px; padding-right: 5px; border-radius: 12px; border: solid white 2px; margin-left: 10px; line-height: 28px;"
+                hintButton.onclick = function () {
+                    if (!document.getElementById("hint_text")) {
+                        hintText = document.createElement("div");
+                        hintText.id = "hint_text";
+                        hintText.style = "color: white; font-size: 24px; width: 800px;"
+                        hintText.textContent = questions[questionCounter].hint;
+                        document.getElementById("question_display").appendChild(hintText);
+                    } else {
+                        document.getElementById("hint_text").remove();
+                    }
+                }
+                var answerInput = document.createElement("input");
+                answerInput.setAttribute("type", "text");
+                answerInput.style = "font-size: 24px; border-radius: 12px; outline: 0; padding-left: 5px; padding-right: 5px;"
+                answerInput.onchange = function () {
+                    if (answerInput.value.toLowerCase() === questions[questionCounter].answer.toLowerCase()) {
+                        object.remove();
+                        if (document.getElementById("hint_text")) {
+                            document.getElementById("hint_text").remove();
+                        }
+                        if (object.id === "bowTop") {
+                            while (document.getElementsByClassName("bow").length > 0) {
+                                document.getElementsByClassName("bow")[0].remove();
+                            }
+                        }
+                        answerDisplay.remove();
+                        questionCounter += 1;
+                        if (questionCounter == 5) {
+                            revealBox();
+                        } else if (questionCounter == 6) {
+                            document.getElementsByClassName("cube__face--top")[0].remove();
+                        }
+                    } else {
+                        alert("That wasn't the answer I was looking for");
+                    }
+                }
+                answerDisplay.appendChild(questionText);
+                var container = document.createElement("div")
+                container.appendChild(answerInput);
+                container.appendChild(hintButton);
+                container.style = "display:flex; justify-content: center; padding: 10px;"
+                answerDisplay.appendChild(container);
+                document.getElementById("question_display").appendChild(answerDisplay);
+            }
+        }
+        else {
+            object.remove();
+            questionCounter += 1;
+            if (object.id === "bowTop") {
+                while (document.getElementsByClassName("bow").length > 0) {
+                    document.getElementsByClassName("bow")[0].remove();
+                }
+            }
+            if (questionCounter == 5) {
+                revealBox();
+            } else if (questionCounter == 6) {
+                document.getElementsByClassName("cube__face--top")[0].remove();
+            }
+
+        }
+    }
+    function revealBox() {
+        for (var i = 0; i < document.getElementsByClassName("cube__face").length; i++) {
+            document.getElementsByClassName("cube__face")[i].style = "background: rgba(134, 89, 45, 1); border: black solid 2px;"
+        }
+        while (document.getElementsByTagName("svg").length > 0) {
+            var svg = document.getElementsByTagName("svg")[0]
+            svg.remove();
+        }
+        var divLine = document.createElement("div");
+        divLine.style = "position: absolute; height: 2px; width: 479px; background-color: black; top: 50%"
+        var packingTape = document.createElement("div");
+        packingTape.style = "position: absolute; height:100px; width: 120px; left:180px; top:190px; background: rgba(255,255,255, .5);"
+        packingTape.setAttribute("onclick", "askQuestion(this)");
+        document.getElementsByClassName("cube__face--top")[0].appendChild(divLine);
+        document.getElementsByClassName("cube__face--top")[0].appendChild(packingTape);
+    }
+    function addStyle() {
+        if (passingData.giftIsImage) {
+            if (document.getElementById("giftVal")) {
+                document.getElementById("giftVal").remove();
+            }
+            if (passingData.link!=undefined && passingData.link) {
+                var link = document.createElement("a");
+                link.id = "giftVal";
+                link.href = passingData.link;
+                var image = document.createElement("img");
+                image.src = passingData.giftImage;
+                image.style = "max-height: 100%; max-width: 100%; text-align:center;"
+                link.appendChild(image);
+                document.getElementById("giftZone").appendChild(link);
+            } else {
+                var image = document.createElement("img");
+                image.id = "giftVal"
+                image.src = passingData.giftImage;
+                image.style = "max-height: 100%; max-width: 100%; text-align:center;"
+                document.getElementById("giftZone").appendChild(image);
+            }
+        } else {
+            if (document.getElementById("giftVal")) {
+                document.getElementById("giftVal").remove();
+            }
+            if (passingData.link!=undefined && passingData.link) {
+                console.log("here")
+                var link = document.createElement("a");
+                link.style = "text-decoration: none; color: white; text-align:center;"
+                link.id = "giftVal";
+                link.href = passingData.link;
+                var giftText = document.createElement("div")
+                giftText.textContent = passingData.giftText;
+                link.appendChild(giftText);
+                document.getElementById("giftZone").appendChild(link);
+            } else {
+                var giftText = document.createElement("div")
+                giftText.id = "giftVal"
+                giftText.textContent = passingData.giftText;
+                giftText.style = "text-align:center;"
+                document.getElementById("giftZone").appendChild(giftText);
+            }
+        }
+        document.getElementById("topMessage").textContent = passingData.topMessage;
+        for (var i = 0; i < document.getElementsByClassName("cube__face").length; i++) {
+            document.getElementsByClassName("cube__face")[i].style.backgroundColor = passingData.boxColor;
+            document.getElementsByClassName("cube__face")[i].style.border = "solid 1px " + changeBrightness(passingData.boxColor, .3)
+            console.log(document.getElementsByClassName("cube__face")[i].style.border);
+        }
+        for (var i = 0; i < document.getElementsByClassName("bowSection").length; i++) {
+            document.getElementsByClassName("bowSection")[i].style.backgroundColor = passingData.bowColor;
+            document.getElementsByClassName("bowSection")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
+        }
+        for (var i = 0; i < document.getElementsByClassName("bowEdge").length; i++) {
+            document.getElementsByClassName("bowEdge")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
+        }
+        for (var i = 0; i < document.getElementsByClassName("bowCenter").length; i++) {
+            document.getElementsByClassName("bowCenter")[i].style.border = "solid 70px " + (passingData.bowColor);
+        }
+        for (var i = 0; i < document.getElementsByClassName("bowTail").length; i++) {
+            document.getElementsByClassName("bowTail")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
+            document.getElementsByClassName("bowTail")[i].style.backgroundColor = passingData.bowColor;
+        }
+    }
+    function changeBrightness(h, percent) {
+        let r = 0, g = 0, b = 0;
+
+        // 3 digits
+        if (h.length == 4) {
+            r = "0x" + h[1] + h[1];
+            g = "0x" + h[2] + h[2];
+            b = "0x" + h[3] + h[3];
+
+            // 6 digits
+        } else if (h.length == 7) {
+            r = "0x" + h[1] + h[2];
+            g = "0x" + h[3] + h[4];
+            b = "0x" + h[5] + h[6];
+        }
+
+        return "rgb(" + +r * percent + "," + +g * percent + "," + b * percent + ")";
+    }
+    addStyle();
+</script>
+<style>
+    body {
+        font-family: sans-serif;
+        background-color: #2d2d2d;
+        display: flex;
+        margin: 0px 30px 0px 30px;
+        height: 100%;
+    }
+</style>
+<style id="styleDownload">
+    body {
+        background-color: #2d2d2d;
+        font-family: sans-serif;
+    }
+    * {
+        box-sizing: border-box;
+    }
+
+    .boxStuffContainer {
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .scene {
+        width: 480px;
+        height: 480px;
+
+        margin: 80px;
+        perspective: 480px;
+    }
+
+    .cube {
+        width: 480px;
+        height: 480px;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: translateZ(-240px);
+        transition: transform 1s;
+    }
+
+    .cube.show-front {
+        transform: translateZ(-240px) rotateY(0deg);
+    }
+
+    .cube.show-right {
+        transform: translateZ(-240px) rotateY(-90deg);
+    }
+
+    .cube.show-back {
+        transform: translateZ(-240px) rotateY(-180deg);
+    }
+
+    .cube.show-left {
+        transform: translateZ(-240px) rotateY(90deg);
+    }
+
+    .cube.show-top {
+        transform: translateZ(-240px) rotateX(-90deg);
+    }
+
+    .cube.show-bottom {
+        transform: translateZ(-240px) rotateX(90deg);
+    }
+
+    .cube__face {
+        position: absolute;
+        width: 480px;
+        height: 480px;
+        line-height: 480px;
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    .cube__face--front {
+        transform: rotateY(0deg) translateZ(240px);
+    }
+
+    .cube__face--right {
+        transform: rotateY(90deg) translateZ(240px);
+    }
+
+    .cube__face--back {
+        transform: rotateY(180deg) translateZ(240px);
+    }
+
+    .cube__face--left {
+        transform: rotateY(-90deg) translateZ(240px);
+    }
+
+    .cube__face--top {
+        transform: rotateX(90deg) translateZ(240px);
+    }
+
+    .cube__face--bottom {
+        transform: rotateX(-90deg) translateZ(240px);
+    }
+
+    .bowEdge {
+        border-color: black;
+    }
+
+    label {
+        margin-right: 10px;
+    }
+</style>
