@@ -1,241 +1,91 @@
-<body id="body">
-    <div id="leftSide" style="width:30%; border-right: solid black 2px; padding: 2px;">
-        <div style="font-size: 40px; padding: 20px; text-align: center; color: white;">Present Presenter</div>
-        <div>
-            <div style="font-size: 24px; color: white;">Top Message:</div>
-            <textarea id="topMessageInput" cols="30" rows="3"
-                style="margin: 20px; margin-top:10px; font-size: 20px; color: black; border-radius: 10px; resize: none; outline: none;">Open your Gift</textarea>
-        </div>
-        <div id="colorSelectors" style="color: white; font-size: 36px;">
-            Colors:
-            <div style="line-height: 40px; vertical-align: center; font-size: 24px; margin-left: 20px;">
-                <label for="boxColorPicker">Box:</label>
-                <input id="boxColorPicker" type="color" onchange="setColor(this)" value="#004d00"
-                    style="width: 100px; border-radius: 10px; background-color: #101010; border-color: #101010; margin-right: 10px;" />
-                <span>or</span>
-                <input id="boxColorHTML" type="text" onchange="setColor(this)" value="#004d00"
-                    style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; margin-left: 10px;">
+<body id="body" style="min-height: calc(100% - 10px);">
+    <div id="lower" style="display: flex;">
+        <div id="leftSide"
+            style="width:25%; min-height: 100vh; background-color: #1a1a1a; border-right: solid black 2px; padding: 0 0px 0 30px;">
+            <div>
+                <div style="font-size: 28px; color: white; margin-top: 10px;">Top Message:</div>
+                <textarea id="topMessageInput" cols="30" rows="3"
+                    style="margin: 20px; margin-top:10px; font-size: 20px; color: black; border-radius: 10px; resize: none; outline: none; box-shadow: 5px 5px 5px black;">Open your Gift</textarea>
             </div>
-            <div style="line-height: 40px; vertical-align: center; font-size: 24px; margin-left: 20px;">
-                <label for="bowColorPicker">Bow:</label>
-                <input id="bowColorPicker" type="color" onchange="setColor(this)" value="#ff0000"
-                    style="width: 100px; border-radius: 10px; background-color: #101010; border-color: #101010; margin-right: 10px;" />
-                <span>or</span>
-                <input id="bowColorHTML" type="text" onchange="setColor(this)" value="#ff0000"
-                    style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; margin: 5px; margin-left: 10px;">
-            </div>
-        </div>
-        <div style="color:white; font-size:36px;">Questions:
-            <div id="listQuestions">
-                <div id="insideQuestions"></div>
-            </div>
-            <input id="createQuestionButton" type="button" onclick="createQuestion()" value="New Question"
-                style="font-size: 20px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 20px;" />
-            <div id="maxQuestions" hidden="true">You have reach the max amount of Questions</div>
-            <div id="createQuestionForm"></div>
-        </div>
-        <div id="gift" style="color: white; font-size: 24px;">
-            <div style="font-size: 36px; color: white; margin: 10px 10px 10px 0;">Inside</div>
-            <div style="margin-left: 20px;">
-                <input type="radio" id="useText" name="giftFormat" onchange="giftFormat(this)" value="Text">
-                <label for="useImage" style="margin:5px; font-size: 24px;">Text</label>
-                <input type="radio" id="useImage" name="giftFormat" onchange="giftFormat(this)" value="Image">
-                <label for="useImage" style="margin:5px; font-size: 24px;">Image</label>
-            </div>
-            <div id="giftImage" style="margin-left: 20px;" hidden="true">
-                <label for="imageInput" style="font-size: 24px; margin: 10px 10px 10px 0;">Add image:</label>
-                <input type="file" id="giftImageInput" accept="image/*" onchange="giftInputHandler(this)"
-                    style="margin: 10px 10px 10px 0;">
-            </div>
-            <div id="giftText" style="margin-left: 20px;">
-                <textarea id="giftTextInput" cols="30" rows="3"
-                    style="margin: 20px; margin-left: 0px; font-size: 20px; color: black; border-radius: 10px; resize: none; outline: none;">Here is your Gift</textarea>
-            </div>
-            <div style="margin-left: 20px;">
-                <label for="linkInput">Link: </label>
-                <input type="text" id="linkInput" onchange="addLink(this)" autocomplete="off"
-                    style="font-size: 20px; padding: 2px; padding-left: 5px; padding-right: 5px; border-radius: 10px; outline: none;">
-            </div>
-        </div>
-        <div style="display: flex; flex-direction: column; margin-top: 40px;">
-            <input type="button" onclick="reRenderCube()" value="Reset Cube"
-                style="margin: 10px; margin-left: 0px; font-size: 24px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; width: 30%; outline: none;" />
-            <input type="button" onclick="downloadHTML()" value="Download"
-                style="font-size: 36px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 0px; width: 200px; outline: none;" />
-        </div>
-    </div>
-    <div id="rightSide" style="width:70%; text-align:center;">
-        <div id="boxStuffContainer" style = "background-color: #2d2d2d;">
-            <div style="width: 100%; align-content: center; display: flex; justify-content: center;">
-                <div id="topMessage"
-                    style="color: white; font-size: 40px; padding-top: 40px; width: 60%; text-align: center;">
+            <div id="colorSelectors"
+                style="color: white; font-size: 28px; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+                Colors:
+                <div style="display: flex; font-size: 20px; margin-left: 20px; align-items: center; height: 40px;">
+                    <div style="width: 55px; position: relative; top:-2px;">Box:</div>
+                    <input id="boxColorPicker" type="color" onchange="setColor(this)" value="#004d00"
+                        style="width: 100px; border-radius: 10px; background-color: #101010; border-color: #101010; vertical-align: text-top; outline: none; box-shadow: 5px 5px 5px black;" />
+                    <div style="width: 30px;text-align: center; position: relative; top:-2px; width: 60px;">or</div>
+                    <input id="boxColorHTML" type="text" onchange="setColor(this)" value="#004d00"
+                        style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; outline: none; box-shadow: 5px 5px 5px black;">
+                </div>
+                <div style="display: flex; font-size: 20px; margin-left: 20px; align-items: center; height: 40px;">
+                    <div style="width: 55px; vertical-align: 100%; position: relative; top:-2px;">Bow:</div>
+                    <input id="bowColorPicker" type="color" onchange="setColor(this)" value="#ff0000"
+                        style="width: 100px; border-radius: 10px; background-color: #101010; border-color: #101010; outline: none; box-shadow: 5px 5px 5px black;" />
+                    <div style="width: 30px;text-align: center;position: relative; top:-2px; width: 60px;">or</div>
+                    <input id="bowColorHTML" type="text" onchange="setColor(this)" value="#ff0000"
+                        style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; outline: none; box-shadow: 5px 5px 5px black;">
                 </div>
             </div>
-            <div id="downloadContent">
-                <div class="scene" style="position: relative; left: calc(50% - 320px);">
-                    <div class="cube">
-                        <div class="gift"
-                            style="position: absolute; top: -120px; left: 30px; transform: rotateX(90deg); text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
-                            <div id="giftZone"
-                                style="width: 420px; height: 320px; font-size: 48px; color: white; display: flex; align-items: center; justify-content: center;">
-                            </div>
-                        </div>
-                        <div class="cube__face cube__face--front">
-                            <div class="bow">
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
-                                </div>
-                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
-                                </div>
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cube__face cube__face--back">
-                            <div class="bow">
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
-                                </div>
-                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
-                                </div>
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cube__face cube__face--right">
-                            <svg height="480" width="480" style="position: absolute; left:0; top:0;">
-                                <line x1="3" y1="3" x2="477" y2="477" style="stroke: black;stroke-width:2;" />
-                                <line x1="3" y1="477" x2="477" y2="3" style="stroke: black;stroke-width:2;" />
-                                <line x1="240" y1="480" x2="240" y2=240 style="stroke: black;stroke-width:2;" />
-                            </svg>
-                            <div class="tape"
-                                style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:180px; top:190px;"
-                                onclick="askQuestion(this)">
-                            </div>
-                            <div class="bow">
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
-                                </div>
-                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
-                                </div>
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cube__face cube__face--left">
-                            <svg height="480" width="480" style="position: absolute; left:0; top:0;">
-                                <line x1="3" y1="3" x2="477" y2="477" style="stroke: black;stroke-width:2;" />
-                                <line x1="3" y1="477" x2="477" y2="3" style="stroke: black;stroke-width:2;" />
-                                <line x1="240" y1="480" x2="240" y2=240 style="stroke: black;stroke-width:2;" />
-                            </svg>
-                            <div class="tape"
-                                style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:180px; top:190px;"
-                                onclick="askQuestion(this)">
-                            </div>
-                            <div class="bow">
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
-                                </div>
-                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
-                                </div>
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cube__face cube__face--top">
-                            <div class="bow">
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
-                                </div>
-                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
-                                </div>
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
-                                </div>
-                            </div>
-                            <div id="bowTop" onclick="askQuestion(this)">
-                                <div class="bowTail"
-                                    style="position: absolute; left: 120px; top: 192px; width: 100px; height: 200px; border-style: solid; border-width:  1px; transform: rotate(30deg);">
-                                </div>
-                                <div class="bowTail"
-                                    style="position: absolute; left: 250px; top: 190px; width: 100px; height: 200px; border-style: solid; border-width:1px; transform: rotate(-30deg);">
-                                </div>
-                                <div style="position: absolute; left: 60px; top: 60px;">
-                                    <div class="bowCenter"
-                                        style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent;">
-                                    </div>
-                                    <div class="bowEdge"
-                                        style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border-radius: 50%; background-color:transparent;">
-                                    </div>
-                                    <div class="bowEdge"
-                                        style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border-radius: 50%; background-color:transparent;">
-                                    </div>
-                                </div>
-                                <div style="position: absolute; left: 220px; top: 60px; transform: translateZ(300px);">
-                                    <div class="bowCenter"
-                                        style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent;">
-                                    </div>
-                                    <div class="bowEdge"
-                                        style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent;">
-                                    </div>
-                                    <div class="bowEdge"
-                                        style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cube__face cube__face--bottom">
-                            <svg height="480" width="480" style="position: absolute; left:0; top:0;">
-                                <line x1="0" y1="240" x2="480" y2="240" style="stroke: black;stroke-width:2;" />
-                            </svg>
-                            <div class="tape"
-                                style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:60px; top:190px;"
-                                onclick="askQuestion(this)">
-                            </div>
-                            <div class="tape"
-                                style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left: 300px; top:190px;"
-                                onclick="askQuestion(this)">
-                            </div>
-                            <div class="bow">
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
-                                </div>
-                                <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
-                                </div>
-                                <div class="bowSection"
-                                    style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
-                                </div>
-                            </div>
-                        </div>
+            <div style="color:white; font-size:28px;">
+                <input id="createQuestionButton" type="button" onclick="createQuestion()" value="Add Question"
+                    style="font-size: 24px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 0px; box-shadow: 5px 5px 5px black;" />
+                <div id="maxQuestions" style="font-size: 20px;" hidden="true">You have reach the max amount of
+                    Questions</div>
+                <div id="createQuestionForm"></div>
+                <div id="listQuestions"
+                    style="max-height: 200px; overflow-y: auto; scrollbar-color: #1a1a1a #111111; background-color: #1a1a1a; margin-left: 20px; border-radius: 10px;">
+                    <div id="insideQuestions"></div>
+                </div>
+            </div>
+            <div id="gift" style="color: white; font-size: 20px;">
+                <div style="font-size: 28px; color: white; margin: 0px 10px 0px 0;">Inside:</div>
+                <div style="margin-left: 20px;">
+                    <input type="radio" id="useText" name="giftFormat" onchange="giftFormat(this)" value="Text">
+                    <label for="useImage" style="margin:5px; font-size: 20px;">Text</label>
+                    <input type="radio" id="useImage" name="giftFormat" onchange="giftFormat(this)" value="Image">
+                    <label for="useImage" style="margin:5px;">Image</label>
+                </div>
+                <div id="giftImage" style="margin-left: 20px;" hidden="true">
+                    <label for="imageInput" style="font-size: 20px; margin: 10px 10px 0px 0;">Add image:</label>
+                    <input type="file" id="giftImageInput" accept="image/*" onchange="giftInputHandler(this)"
+                        style="margin: 10px 10px 10px 0;">
+                </div>
+                <div id="giftText" style="margin-left: 20px;">
+                    <textarea id="giftTextInput" cols="30" rows="3"
+                        style="margin: 10px; margin-left: 0px; font-size: 20px; color: black; border-radius: 10px; resize: none; outline: none; box-shadow: 5px 5px 5px black;">Here is your Gift</textarea>
+                </div>
+                <div style="margin-left: 20px;">
+                    <label for="linkInput">Link: </label>
+                    <input type="text" id="linkInput" onchange="addLink(this)" autocomplete="off"
+                        style="font-size: 20px; padding: 2px; padding-left: 5px; padding-right: 5px; border-radius: 10px; outline: none; box-shadow: 5px 5px 5px black;">
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 20px;">
+                <input type="button" onclick="reRenderCube()" value="Reset Cube"
+                    style="margin: 10px; margin-left: 0px; font-size: 24px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; width: 150px; outline: none; box-shadow: 5px 5px 5px black;" />
+                <input type="button" onclick="downloadHTML()" value="Download"
+                    style="font-size: 36px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 0px; width: 200px; outline: none; box-shadow: 5px 5px 5px black;" />
+            </div>
+        </div>
+        <div id="rightSide" style="width:75%; height: (100% - 10px); overflow: hidden; text-align:center;">
+            <div id="header"
+                style="display: flex; font-size: 40px; background-color: #1a1a1a; border-style: solid; border-color: black; border-width: 0 0 2px 0; justify-content: space-between;">
+                <div
+                    style="font-size: 40px;text-align: center; width:400px;  margin-left: 20px; color: white; padding-bottom: 10px; letter-spacing: 5px; font-weight: 400; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+                    Present Presenter</div>
+                <div
+                    style="border-radius: 25px; height:50px; width: 50px; border-style: solid; border-color: white; border-width: 4px; margin: 6px; background-color:#2d2d2d; position:  relative; left: -10px">
+                    <div style="color: white;position: relative; top:-7px;">?</div>
+                </div>
+            </div>
+            <div id="boxStuffContainer" style="background-color: #2d2d2d;">
+                <div style="width: 100%; align-content: center; display: flex; justify-content: center;">
+                    <div id="topMessage"
+                        style="color: white; font-size: 40px; padding-top: 40px; width: 60%; text-align: center; box-shadow: 5px 5px 5px 0px black;">
                     </div>
                 </div>
-                <p class="radio-group" style="color:white; width: 100%; text-align:center;">
-                    <label>
-                        <input type="radio" name="rotate-cube-side" value="front" /> FRONT
-                    </label>
-                    <label>
-                        <input type="radio" name="rotate-cube-side" value="right" /> RIGHT
-                    </label>
-                    <label>
-                        <input type="radio" name="rotate-cube-side" value="back" /> BACK
-                    </label>
-                    <label>
-                        <input type="radio" name="rotate-cube-side" value="left" /> LEFT
-                    </label>
-                    <label>
-                        <input type="radio" name="rotate-cube-side" value="top" checked /> TOP
-                    </label>
-                    <label>
-                        <input type="radio" name="rotate-cube-side" value="bottom" /> BOTTOM
-                    </label>
-                </p>
-                <div id="question_display"
-                    style="width: 100%; display:flex; align-items: center; flex-direction: column;">
-                </div>
+                <div id="downloadContent">  
             </div>
         </div>
     </div>
@@ -244,11 +94,11 @@
     const uneditedBox = `<div id="boxStuffContainer" style = "background-color: #2d2d2d;">
         <div style="width: 100%; align-content: center; display: flex; justify-content: center;">
             <div id="topMessage"
-                style="color: white; font-size: 40px; padding-top: 40px; width: 60%; text-align: center;">
+                style="color: white; font-size: 40px; padding-top: 40px; width: 60%; text-align: center; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
             </div>
         </div>
         <div id="downloadContent">
-            <div class="scene" style="position: relative; left: calc(50% - 320px);">
+            <div class="scene" style="position: relative; left: calc(50% - 320px); backdrop-filter: brightness(0%);">
                 <div class="cube">
                     <div class="gift"
                         style="position: absolute; top: -120px; left: 30px; transform: rotateX(90deg); text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
@@ -259,115 +109,109 @@
                     <div class="cube__face cube__face--front">
                         <div class="bow">
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px -3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0, 130px 0, 130px 179px, -10px 179px);">
                             </div>
-                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            <div class="bowSection" style="position: relative; width: 478px; height: 120px; box-shadow: 0px 2px 10px 0px black, 0px -2px 10px 0px black; clip-path:polygon(0 -10px, 179px -10px, 179px 0px, 299px 0px, 299px -10px, 100% -10px, 100% 130px, 299px 130px, 299px 120px, 179px 120px, 179px 130px, 0px 130px); ">
                             </div>
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px 3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0px, 130px 0, 130px 179px, -10px 179px);">
                             </div>
                         </div>
                     </div>
                     <div class="cube__face cube__face--back">
                         <div class="bow">
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px -3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0, 130px 0, 130px 179px, -10px 179px);">
                             </div>
-                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            <div class="bowSection" style="position: relative; width: 478px; height: 120px; box-shadow: 0px 2px 10px 0px black, 0px -2px 10px 0px black; clip-path:polygon(0 -10px, 179px -10px, 179px 0px, 299px 0px, 299px -10px, 100% -10px, 100% 130px, 299px 130px, 299px 120px, 179px 120px, 179px 130px, 0px 130px); ">
                             </div>
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px 3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0px, 130px 0, 130px 179px, -10px 179px);">
                             </div>
                         </div>
                     </div>
                     <div class="cube__face cube__face--right">
-                        <svg height="480" width="480" style="position: absolute; left:0; top:0;">
-                            <line x1="3" y1="3" x2="477" y2="477" style="stroke: black;stroke-width:2;" />
-                            <line x1="3" y1="477" x2="477" y2="3" style="stroke: black;stroke-width:2;" />
-                            <line x1="240" y1="480" x2="240" y2=240 style="stroke: black;stroke-width:2;" />
-                        </svg>
+                        <div class="creases">
+                        <div style="height:476px; border-left: 1px solid black; position: absolute; top: 1px; left: 240px; transform: skew(45deg); box-shadow: 3px 3px 3px 0px black;"></div>
+                        <div style="height:476px; border-left: 1px solid black; position: absolute; top: 1px; left: 240px; transform: skew(-45deg); box-shadow: -3px 3px 3px 0px black;"></div>
+                        <div style="height:240px; border-left: 1px solid black; position: absolute; top: 240px; left: 240px; box-shadow: 3px 0px 3px 0px black;"></div>
+                        </div>
                         <div class="tape"
                             style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:180px; top:190px;"
                             onclick="askQuestion(this)">
                         </div>
                         <div class="bow">
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px -3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0, 130px 0, 130px 179px, -10px 179px);">
                             </div>
-                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            <div class="bowSection" style="position: relative; width: 478px; height: 120px; box-shadow: 0px 2px 10px 0px black, 0px -2px 10px 0px black; clip-path:polygon(0 -10px, 179px -10px, 179px 0px, 299px 0px, 299px -10px, 100% -10px, 100% 130px, 299px 130px, 299px 120px, 179px 120px, 179px 130px, 0px 130px); ">
                             </div>
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; ">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px 3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0px, 130px 0, 130px 179px, -10px 179px);">
                             </div>
                         </div>
                     </div>
                     <div class="cube__face cube__face--left">
-                        <svg height="480" width="480" style="position: absolute; left:0; top:0;">
-                            <line x1="3" y1="3" x2="477" y2="477" style="stroke: black;stroke-width:2;" />
-                            <line x1="3" y1="477" x2="477" y2="3" style="stroke: black;stroke-width:2;" />
-                            <line x1="240" y1="480" x2="240" y2=240 style="stroke: black;stroke-width:2;" />
-                        </svg>
+                        <div class="creases">
+                        <div style="height:476px; border-left: 1px solid black; position: absolute; top: 1px; left: 240px; transform: skew(45deg); box-shadow: 3px 3px 3px 0px black;"></div>
+                        <div style="height:476px; border-left: 1px solid black; position: absolute; top: 1px; left: 240px; transform: skew(-45deg); box-shadow: -3px 3px 3px 0px black;"></div>
+                        <div style="height:240px; border-left: 1px solid black; position: absolute; top: 240px; left: 240px; box-shadow: 3px 0px 3px 0px black;"></div>
+                        </div>
                         <div class="tape"
                             style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:180px; top:190px;"
                             onclick="askQuestion(this)">
                         </div>
                         <div class="bow">
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px -3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0, 130px 0, 130px 179px, -10px 179px);">
                             </div>
-                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            <div class="bowSection" style="position: relative; width: 478px; height: 120px; box-shadow: 0px 2px 10px 0px black, 0px -2px 10px 0px black; clip-path:polygon(0 -10px, 179px -10px, 179px 0px, 299px 0px, 299px -10px, 100% -10px, 100% 130px, 299px 130px, 299px 120px, 179px 120px, 179px 130px, 0px 130px); ">
                             </div>
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px 3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0px, 130px 0, 130px 179px, -10px 179px);">
                             </div>
                         </div>
                     </div>
                     <div class="cube__face cube__face--top">
                         <div class="bow">
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px -3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0, 130px 0, 130px 179px, -10px 179px);">
                             </div>
-                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            <div class="bowSection" style="position: relative; width: 478px; height: 120px; box-shadow: 0px 2px 10px 0px black, 0px -2px 10px 0px black; clip-path:polygon(0 -10px, 179px -10px, 179px 0px, 299px 0px, 299px -10px, 100% -10px, 100% 130px, 299px 130px, 299px 120px, 179px 120px, 179px 130px, 0px 130px); ">
                             </div>
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px 3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0px, 130px 0, 130px 179px, -10px 179px);">
                             </div>
                         </div>
                         <div id="bowTop" onclick="askQuestion(this)">
                             <div class="bowTail"
-                                style="position: absolute; left: 120px; top: 192px; width: 100px; height: 200px; border-style: solid; border-width:  1px; transform: rotate(30deg);">
+                                style="position: absolute; left: 120px; top: 192px; width: 100px; height: 200px; border-style: solid; border-width:  1px; transform: rotate(30deg); box-shadow: 3px 3px 10px 0px black;">
                             </div>
                             <div class="bowTail"
-                                style="position: absolute; left: 250px; top: 190px; width: 100px; height: 200px; border-style: solid; border-width:1px; transform: rotate(-30deg);">
+                                style="position: absolute; left: 250px; top: 190px; width: 100px; height: 200px; border-style: solid; border-width:1px; transform: rotate(-30deg); box-shadow: 3px 3px 10px 0px black;">
                             </div>
-                            <div style="position: absolute; left: 60px; top: 60px;">
+                            <div style="position: absolute; left: 60px; top: 60px; ">
                                 <div class="bowCenter"
-                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent; box-shadow: 0px 2px 10px 0px black;">
                                 </div>
                                 <div class="bowEdge"
-                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border-radius: 50%; background-color:transparent;">
-                                </div>
-                                <div class="bowEdge"
-                                    style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border-radius: 50%; background-color:transparent;">
+                                    style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border-radius: 50%; background-color:transparent; box-shadow: 4px 4px 5px 0px black inset;">
                                 </div>
                             </div>
-                            <div style="position: absolute; left: 220px; top: 60px; transform: translateZ(300px);">
+                            <div style="position: absolute; left: 220px; top: 60px; transform: translateZ(300px); ">
                                 <div class="bowCenter"
-                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent; box-shadow: 2px 2px 10px 0px black;">
                                 </div>
                                 <div class="bowEdge"
-                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent;">
-                                </div>
-                                <div class="bowEdge"
-                                    style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent;">
+                                    style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent; box-shadow: 4px 4px 5px 0px black inset;">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="cube__face cube__face--bottom">
-                        <svg height="480" width="480" style="position: absolute; left:0; top:0;">
-                            <line x1="0" y1="240" x2="480" y2="240" style="stroke: black;stroke-width:2;" />
-                        </svg>
+                        <div class="creases">
+                        <div style="width:480px; border-top: 1px solid black; position: absolute; top: 240px; left: 0px; box-shadow: 0px -3px 3px 0px black;"></div>
+                        </div>
                         <div class="tape"
                             style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:60px; top:190px;"
                             onclick="askQuestion(this)">
@@ -378,12 +222,12 @@
                         </div>
                         <div class="bow">
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px -3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0, 130px 0, 130px 179px, -10px 179px);">
                             </div>
-                            <div class="bowSection" style="position: relative; width: 100%; height: 120px;">
+                            <div class="bowSection" style="position: relative; width: 478px; height: 120px; box-shadow: 0px 2px 10px 0px black, 0px -2px 10px 0px black; clip-path:polygon(0 -10px, 179px -10px, 179px 0px, 299px 0px, 299px -10px, 100% -10px, 100% 130px, 299px 130px, 299px 120px, 179px 120px, 179px 130px, 0px 130px); ">
                             </div>
                             <div class="bowSection"
-                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px;">
+                                style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px 3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0px, 130px 0, 130px 179px, -10px 179px);">
                             </div>
                         </div>
                     </div>
@@ -470,36 +314,36 @@
         document.getElementById("createQuestionButton").hidden = true;
         var form = document.createElement("DIV");
         form.submit = "false"
-        form.style = "margin: 20px;"
+        form.style = "margin: 5px;"
         var questionText = document.createElement("LABEL");
         questionText.setAttribute("for", "question")
-        questionText.style = "font-size:24px; color:white;"
+        questionText.style = "font-size:20px; color:white;"
         questionText.textContent = "Question: ";
         var question = document.createElement("INPUT");
         question.onkeydown = "return event.key!='Enter'";
         question.setAttribute("id", "question");
         question.setAttribute("type", "text");
-        question.style = "font-size:20px; width: 70%; border-radius: 5px;"
+        question.style = "font-size:20px; width: 70%; border-radius: 5px; outline: none; padding: 0;"
         var answerText = document.createElement("LABEL");
         answerText.setAttribute("for", "answer");
-        answerText.style = "font-size:24px; color:white;";
+        answerText.style = "font-size:20px; color:white;";
         answerText.textContent = "Answer: ";
         var answer = document.createElement("INPUT");
         answer.setAttribute("id", "answer");
         answer.setAttribute("type", "text");
-        answer.style = "font-size:20px; width: 70%; border-radius: 5px;"
+        answer.style = "font-size:20px; width: 70%; border-radius: 5px; outline:none; padding: 0;"
         var hintText = document.createElement("LABEL");
         hintText.setAttribute("for", "hint");
-        hintText.style = "font-size:24px; color:white;";
+        hintText.style = "font-size:20px; color:white;";
         hintText.textContent = "Hint: ";
         var hint = document.createElement("INPUT");
         hint.setAttribute("id", "hint")
         hint.setAttribute("type", "text");
-        hint.style = "font-size:20px; width: 70%; border-radius: 5px;"
+        hint.style = "font-size:20px; width: 70%; border-radius: 5px; outline: none; padding: 0;"
         var submit = document.createElement("INPUT");
         submit.setAttribute("type", "submit");
         submit.setAttribute("value", "Submit");
-        submit.style = "border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px;";
+        submit.style = "border-radius: 5px; border-width: 1px; background-color: #101010; color: white; padding: 2px; padding-left: 5px; padding-right: 5px; margin: 5 5 0 5px;";
         submit.onclick = function () {
             if (questionList.length > 5) {
                 document.getElementById("maxQuestions").hidden = false;
@@ -541,13 +385,13 @@
         //fullQuestion.textContent = (i + 1);
         var question = document.createElement("div");
         question.textContent = "Question " + (i + 1) + ": " + questionList[i].prompt;
-        question.style = "color: white; font-size: 24px; margin-top:10px; margin:5px; margin-left: 20px;";
+        question.style = "color: white; font-size: 20px; margin-top:10px; margin:2px; margin-left: 5px;";
         var answer = document.createElement("div");
         answer.textContent = "Answer: " + questionList[i].answer;
-        answer.style = "color: white; font-size: 24px; margin:5px; margin-left: 20px;";
+        answer.style = "color: white; font-size: 20px; margin:2px; margin-left: 5px;";
         var hint = document.createElement("div");
         hint.textContent = "Hint: " + questionList[i].hint;
-        hint.style = "color: white; font-size: 24px; margin:5px; margin-left: 20px;";
+        hint.style = "color: white; font-size: 20px; margin:2px; margin-left: 5px;";
         var removeButton = document.createElement("input");
         removeButton.value = "Remove";
         removeButton.style = "padding:3px; font-size:12px; color: white; background-color: #101010; border-radius:5px; border: solid 1px white; margin: 5px; margin-left: 20px;";
@@ -746,9 +590,9 @@
         for (var i = 0; i < document.getElementsByClassName("cube__face").length; i++) {
             document.getElementsByClassName("cube__face")[i].style = "background: rgba(134, 89, 45, 1); border: black solid 2px;"
         }
-        while (document.getElementsByTagName("svg").length > 0) {
-            var svg = document.getElementsByTagName("svg")[0]
-            svg.remove();
+        while (document.getElementsByClassName("creases").length > 0) {
+            var creases = document.getElementsByClassName("creases")[0]
+            creases.remove();
         }
         var divLine = document.createElement("div");
         divLine.style = "position: absolute; height: 2px; width: 479px; background-color: black; top: 50%"
@@ -763,7 +607,7 @@
             if (document.getElementById("giftVal")) {
                 document.getElementById("giftVal").remove();
             }
-            if (passingData.link!=undefined && passingData.link) {
+            if (passingData.link != undefined && passingData.link) {
                 var link = document.createElement("a");
                 link.id = "giftVal";
                 link.href = passingData.link;
@@ -783,7 +627,7 @@
             if (document.getElementById("giftVal")) {
                 document.getElementById("giftVal").remove();
             }
-            if (passingData.link!=undefined && passingData.link) {
+            if (passingData.link != undefined && passingData.link) {
                 console.log("here")
                 var link = document.createElement("a");
                 link.style = "text-decoration: none; color: white; text-align:center;"
@@ -809,7 +653,6 @@
         }
         for (var i = 0; i < document.getElementsByClassName("bowSection").length; i++) {
             document.getElementsByClassName("bowSection")[i].style.backgroundColor = passingData.bowColor;
-            document.getElementsByClassName("bowSection")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
         }
         for (var i = 0; i < document.getElementsByClassName("bowEdge").length; i++) {
             document.getElementsByClassName("bowEdge")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
@@ -821,6 +664,7 @@
             document.getElementsByClassName("bowTail")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
             document.getElementsByClassName("bowTail")[i].style.backgroundColor = passingData.bowColor;
         }
+        document.getElementById("header").style.background = "linear-gradient(45deg, "+ passingData.boxColor +",66%,"+passingData.bowColor+")";
     }
     function changeBrightness(h, percent) {
         let r = 0, g = 0, b = 0;
@@ -843,19 +687,16 @@
     addStyle();
 </script>
 <style>
-    body {
-        font-family: sans-serif;
-        background-color: #2d2d2d;
-        display: flex;
-        margin: 0px 30px 0px 30px;
-        height: 100%;
-    }
 </style>
 <style id="styleDownload">
     body {
         background-color: #2d2d2d;
-        font-family: sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 100%;
+        margin: 0;
+        padding: 0;
     }
+
     * {
         box-sizing: border-box;
     }
@@ -867,8 +708,7 @@
     .scene {
         width: 480px;
         height: 480px;
-
-        margin: 80px;
+        margin: 30px 80px 30px 80px;
         perspective: 480px;
     }
 
@@ -916,6 +756,7 @@
         text-align: center;
         border-radius: 5px;
     }
+    .haloing{box-shadow: 0px 2px 20px -2px rgba(255,255,255,.025), 2px 0px 20px -2px rgba(255,255,255,.025), 0px -2px 20px -2px rgba(255,255,255,.025), -2px 0px 20px -2px rgba(255,255,255,.025);}
 
     .cube__face--front {
         transform: rotateY(0deg) translateZ(240px);
