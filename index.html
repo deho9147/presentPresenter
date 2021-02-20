@@ -13,7 +13,7 @@
                 <div style="display: flex; font-size: 20px; margin-left: 20px; align-items: center; height: 40px;">
                     <div style="width: 55px; position: relative; top:-2px;">Box:</div>
                     <input id="boxColorPicker" type="color" onchange="setColor(this)" value="#004d00"
-                        style="width: 100px; border-radius: 10px; background-color: #101010; border-color: #101010; vertical-align: text-top; outline: none; box-shadow: 5px 5px 5px black;" />
+                        style="width: 100px; border-radius: 10px; background-color: #2d2d2d; border-color: #2d2d2d; vertical-align: text-top; outline: none; box-shadow: 5px 5px 5px black;" />
                     <div style="width: 30px;text-align: center; position: relative; top:-2px; width: 60px;">or</div>
                     <input id="boxColorHTML" type="text" onchange="setColor(this)" value="#004d00"
                         style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; outline: none; box-shadow: 5px 5px 5px black;">
@@ -21,7 +21,7 @@
                 <div style="display: flex; font-size: 20px; margin-left: 20px; align-items: center; height: 40px;">
                     <div style="width: 55px; vertical-align: 100%; position: relative; top:-2px;">Bow:</div>
                     <input id="bowColorPicker" type="color" onchange="setColor(this)" value="#ff0000"
-                        style="width: 100px; border-radius: 10px; background-color: #101010; border-color: #101010; outline: none; box-shadow: 5px 5px 5px black;" />
+                        style="width: 100px; border-radius: 10px; background-color: #2d2d2d; border-color: #2d2d2d; outline: none; box-shadow: 5px 5px 5px black;" />
                     <div style="width: 30px;text-align: center;position: relative; top:-2px; width: 60px;">or</div>
                     <input id="bowColorHTML" type="text" onchange="setColor(this)" value="#ff0000"
                         style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; outline: none; box-shadow: 5px 5px 5px black;">
@@ -34,12 +34,12 @@
                     Questions</div>
                 <div id="createQuestionForm"></div>
                 <div id="listQuestions"
-                    style="max-height: 200px; overflow-y: auto; scrollbar-color: #1a1a1a #111111; background-color: #1a1a1a; margin-left: 20px; border-radius: 10px;">
+                    style="max-height: 200px; overflow-y: auto; scrollbar-color: #2d2d2d #101010; background-color: #1a1a1a; margin-left: 20px; border-radius: 10px;">
                     <div id="insideQuestions"></div>
                 </div>
             </div>
             <div id="gift" style="color: white; font-size: 20px;">
-                <div style="font-size: 28px; color: white; margin: 0px 10px 0px 0;">Inside:</div>
+                <div style="font-size: 28px; color: white; margin: 0px 10px 0px 0;">Gift:</div>
                 <div style="margin-left: 20px;">
                     <input type="radio" id="useText" name="giftFormat" onchange="giftFormat(this)" value="Text">
                     <label for="useImage" style="margin:5px; font-size: 20px;">Text</label>
@@ -74,30 +74,40 @@
                 <div
                     style="font-size: 40px;text-align: center; width:400px;  margin-left: 20px; color: white; padding-bottom: 10px; letter-spacing: 5px; font-weight: 400; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
                     Present Presenter</div>
-                <div
-                    style="border-radius: 25px; height:50px; width: 50px; border-style: solid; border-color: white; border-width: 4px; margin: 6px; background-color:#2d2d2d; position:  relative; left: -10px">
+                <div onclick="(function(){document.getElementById('helpText').hidden = !document.getElementById('helpText').hidden;})();"
+                    style="user-select: none; border-radius: 25px; height:50px; width: 50px; border-style: solid; border-color: white; border-width: 4px; margin: 6px; background-color:#1a1a1a; position:  relative; left: -10px; box-shadow: 2px 2px 10px black;">
                     <div style="color: white;position: relative; top:-7px;">?</div>
                 </div>
             </div>
-            <div id="boxStuffContainer" style="background-color: #2d2d2d;">
-                <div style="width: 100%; align-content: center; display: flex; justify-content: center;">
-                    <div id="topMessage"
-                        style="color: white; font-size: 40px; padding-top: 40px; width: 60%; text-align: center; box-shadow: 5px 5px 5px 0px black;">
-                    </div>
+                <div id="downloadContent">
                 </div>
-                <div id="downloadContent">  
+            </div>
+            <div id="helpText" hidden="true"
+                style="width: 900px; position: absolute; top: 20%; left: calc(50% - 450px); padding: 10px; text-align:left;background-color:#1a1a1a; color: white; border-radius: 10px; font-size: 20px; border: 2px solid black; box-shadow: 10px 10px 20px 5px black;">
+                <div style="padding:5px; margin: 5px;">Unwrap the Present by clicking the bow on the Top, then by
+                    clicking pieces of tape until the box opens up revealing the Gift</div>
+                <div style="padding: 5px; margin: 5px;">When the bow is untied and and each time a piece of tape is
+                    removed, a question will be asked</div>
+                <div style="padding: 5px; margin: 5px;">Once the Present is finished, download the file and send it. The
+                    reciever just has to open it in the web browser of their choice</div>
+                <div style="width: 100%; text-align: center;">
+                    <input type="button" onclick="(function(){document.getElementById('helpText').hidden=true;})();" value="Hide"
+                        style="font-size: 20px; width: 70px; text-align: center; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 0px; outline: none; box-shadow: 5px 5px 5px black;"></input>
+                </div>
             </div>
         </div>
-    </div>
 </body>
 <script>
-    const uneditedBox = `<div id="boxStuffContainer" style = "background-color: #2d2d2d;">
+    const uneditedBox = `<div id="boxStuffContainer">
         <div style="width: 100%; align-content: center; display: flex; justify-content: center;">
             <div id="topMessage"
                 style="color: white; font-size: 40px; padding-top: 40px; width: 60%; text-align: center; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
             </div>
         </div>
-        <div id="downloadContent">
+        <div class="shadowPostion" style="position: relative; width:480px; height:0px; display:flex; justify-content: center; left:calc(50% - 240px); top: 480px;">
+        <div class="shadow">
+        </div>
+        </div>
             <div class="scene" style="position: relative; left: calc(50% - 320px); backdrop-filter: brightness(0%);">
                 <div class="cube">
                     <div class="gift"
@@ -192,18 +202,12 @@
                             </div>
                             <div style="position: absolute; left: 60px; top: 60px; ">
                                 <div class="bowCenter"
-                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent; box-shadow: 0px 2px 10px 0px black;">
-                                </div>
-                                <div class="bowEdge"
-                                    style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border-radius: 50%; background-color:transparent; box-shadow: 4px 4px 5px 0px black inset;">
+                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent; box-shadow: 2px 2px 10px 0px black, 2px 2px 20px 0px black inset;">
                                 </div>
                             </div>
                             <div style="position: absolute; left: 220px; top: 60px; transform: translateZ(300px); ">
                                 <div class="bowCenter"
-                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent; box-shadow: 2px 2px 10px 0px black;">
-                                </div>
-                                <div class="bowEdge"
-                                    style="position:absolute; top: 70px; left: 70px; width:60px; height: 60px; border:1px; border-style: solid; border-radius: 50%; background-color:transparent; box-shadow: 4px 4px 5px 0px black inset;">
+                                    style="position:absolute; top: 0px; left: 0px; width:200px; height: 200px; border:70px; border-style: solid; border-radius: 50%; background-color:transparent; box-shadow: 2px 2px 10px 0px black, 2px 2px 20px 0px black inset;">
                                 </div>
                             </div>
                         </div>
@@ -256,10 +260,10 @@
             <div id="question_display"
                 style="width: 100%; display:flex; align-items: center; flex-direction: column;">
             </div>
-        </div>
     </div>`
 </script>
 <script>
+    document.getElementById("giftFormat")
     var passingData = {}
     var questionList = []
     function setData() {
@@ -287,8 +291,7 @@
         }
     }
     function reRenderCube() {
-        document.getElementById("downloadContent").remove();
-        document.getElementById("boxStuffContainer").innerHTML = uneditedBox;
+        document.getElementById("downloadContent").innerHTML = uneditedBox;
         questionCounter = 0;
         passingData = { ...passingData, questions: questionList, }
         setData();
@@ -497,6 +500,7 @@
     }
     var questionCounter = 0;
     var cube = document.querySelector('.cube');
+    var shadow = document.querySelector('.shadow');
     var radioGroup = document.querySelector('.radio-group');
     var currentClass = '';
 
@@ -505,8 +509,10 @@
         var showClass = 'show-' + checkedRadio.value;
         if (currentClass) {
             cube.classList.remove(currentClass);
+            shadow.classList.remove("show-grow");
         }
         cube.classList.add(showClass);
+        setTimeout(function(){shadow.classList.add("show-grow");},1010);
         currentClass = showClass;
     }
     // set initial side
@@ -664,7 +670,7 @@
             document.getElementsByClassName("bowTail")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
             document.getElementsByClassName("bowTail")[i].style.backgroundColor = passingData.bowColor;
         }
-        document.getElementById("header").style.background = "linear-gradient(45deg, "+ passingData.boxColor +",66%,"+passingData.bowColor+")";
+        document.getElementById("header").style.background = "linear-gradient(45deg, " + passingData.boxColor + ",66%," + passingData.bowColor + ")";
     }
     function changeBrightness(h, percent) {
         let r = 0, g = 0, b = 0;
@@ -708,7 +714,7 @@
     .scene {
         width: 480px;
         height: 480px;
-        margin: 30px 80px 30px 80px;
+        margin: 30px 80px 90px 80px;
         perspective: 480px;
     }
 
@@ -720,7 +726,21 @@
         transform: translateZ(-240px);
         transition: transform 1s;
     }
-
+    .shadow {
+        width: 420px; 
+        height: 160px;  
+        position: absolute;
+        background: #0f0f0f;
+        box-shadow: inset 0px 0px 20px 45px #2d2d2d;
+        transform-style: preserve-3d;
+        transform-origin: 50% 60%;
+        z-index: -1;
+        transition: transform 1s;
+    }
+    .shadow.show-grow{
+        transform-origin: 50% 20%;
+        transform: scale(1.30,.8);
+    }
     .cube.show-front {
         transform: translateZ(-240px) rotateY(0deg);
     }
@@ -755,8 +775,13 @@
         color: white;
         text-align: center;
         border-radius: 5px;
+        box-shadow: 2px 2px 10px -1px #1a1a1a;
     }
-    .haloing{box-shadow: 0px 2px 20px -2px rgba(255,255,255,.025), 2px 0px 20px -2px rgba(255,255,255,.025), 0px -2px 20px -2px rgba(255,255,255,.025), -2px 0px 20px -2px rgba(255,255,255,.025);}
+
+    .haloing {
+        box-shadow: 0px 2px 20px -2px rgba(255, 255, 255, .025), 2px 0px 20px -2px rgba(255, 255, 255, .025), 0px -2px 20px -2px rgba(255, 255, 255, .025), -2px 0px 20px -2px rgba(255, 255, 255, .025);
+        background: radial-gradient(#111111 10%, #202020 50%, transparent 70%);
+    }
 
     .cube__face--front {
         transform: rotateY(0deg) translateZ(240px);
