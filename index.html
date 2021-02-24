@@ -41,9 +41,9 @@
             <div id="gift" style="color: white; font-size: 20px;">
                 <div style="font-size: 28px; color: white; margin: 0px 10px 0px 0;">Gift:</div>
                 <div style="margin-left: 20px;">
-                    <input type="radio" id="useText" name="giftFormat" onchange="giftFormat(this)" value="Text">
+                    <input type="radio" id="useText" name="giftFormat" onchange="giftFormat(this)" value="Text" checked="checked" autocomplete="off">
                     <label for="useImage" style="margin:5px; font-size: 20px;">Text</label>
-                    <input type="radio" id="useImage" name="giftFormat" onchange="giftFormat(this)" value="Image">
+                    <input type="radio" id="useImage" name="giftFormat" onchange="giftFormat(this)" value="Image" autocomplete="off">
                     <label for="useImage" style="margin:5px;">Image</label>
                 </div>
                 <div id="giftImage" style="margin-left: 20px;" hidden="true">
@@ -79,23 +79,24 @@
                     <div style="color: white;position: relative; top:-7px;">?</div>
                 </div>
             </div>
-                <div id="downloadContent">
-                </div>
-            </div>
-            <div id="helpText" hidden="true"
-                style="width: 900px; position: absolute; top: 20%; left: calc(50% - 450px); padding: 10px; text-align:left;background-color:#1a1a1a; color: white; border-radius: 10px; font-size: 20px; border: 2px solid black; box-shadow: 10px 10px 20px 5px black;">
-                <div style="padding:5px; margin: 5px;">Unwrap the Present by clicking the bow on the Top, then by
-                    clicking pieces of tape until the box opens up revealing the Gift</div>
-                <div style="padding: 5px; margin: 5px;">When the bow is untied and and each time a piece of tape is
-                    removed, a question will be asked</div>
-                <div style="padding: 5px; margin: 5px;">Once the Present is finished, download the file and send it. The
-                    reciever just has to open it in the web browser of their choice</div>
-                <div style="width: 100%; text-align: center;">
-                    <input type="button" onclick="(function(){document.getElementById('helpText').hidden=true;})();" value="Hide"
-                        style="font-size: 20px; width: 70px; text-align: center; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 0px; outline: none; box-shadow: 5px 5px 5px black;"></input>
-                </div>
+            <div id="downloadContent">
             </div>
         </div>
+        <div id="helpText" hidden="true"
+            style="width: 900px; position: absolute; top: 20%; left: calc(50% - 450px); padding: 10px; text-align:left;background-color:#1a1a1a; color: white; border-radius: 10px; font-size: 20px; border: 2px solid black; box-shadow: 10px 10px 20px 5px black;">
+            <div style="padding:5px; margin: 5px;">Unwrap the Present by clicking the bow on the Top, then by
+                clicking pieces of tape until the box opens up revealing the Gift</div>
+            <div style="padding: 5px; margin: 5px;">When the bow is untied and and each time a piece of tape is
+                removed, a question will be asked</div>
+            <div style="padding: 5px; margin: 5px;">Once the Present is finished, download the file and send it. The
+                reciever just has to open it in the web browser of their choice</div>
+            <div style="width: 100%; text-align: center;">
+                <input type="button" onclick="(function(){document.getElementById('helpText').hidden=true;})();"
+                    value="Hide"
+                    style="font-size: 20px; width: 70px; text-align: center; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 0px; outline: none; box-shadow: 5px 5px 5px black;"></input>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     const uneditedBox = `<div id="boxStuffContainer">
@@ -263,7 +264,6 @@
     </div>`
 </script>
 <script>
-    document.getElementById("giftFormat")
     var passingData = {}
     var questionList = []
     function setData() {
@@ -297,15 +297,19 @@
         setData();
         addStyle();
         var cube = document.querySelector('.cube');
+        var shadow = document.querySelector('.shadow');
         var radioGroup = document.querySelector('.radio-group');
         var currentClass = '';
+
         function changeSide() {
             var checkedRadio = radioGroup.querySelector(':checked');
             var showClass = 'show-' + checkedRadio.value;
             if (currentClass) {
                 cube.classList.remove(currentClass);
+                shadow.classList.remove("show-grow");
             }
             cube.classList.add(showClass);
+            setTimeout(function () { shadow.classList.add("show-grow"); }, 1010);
             currentClass = showClass;
         }
         // set initial side
@@ -491,6 +495,7 @@
     listQuestions();
     setData();
     reRenderCube();
+    giftFormat(document.getElementById("useText"));
 </script>
 <script id="scriptDownLoad">
     var questions = passingData.questions;
@@ -512,7 +517,7 @@
             shadow.classList.remove("show-grow");
         }
         cube.classList.add(showClass);
-        setTimeout(function(){shadow.classList.add("show-grow");},1010);
+        setTimeout(function () { shadow.classList.add("show-grow"); }, 1010);
         currentClass = showClass;
     }
     // set initial side
@@ -726,9 +731,10 @@
         transform: translateZ(-240px);
         transition: transform 1s;
     }
+
     .shadow {
-        width: 420px; 
-        height: 160px;  
+        width: 420px;
+        height: 160px;
         position: absolute;
         background: #0f0f0f;
         box-shadow: inset 0px 0px 20px 45px #2d2d2d;
@@ -737,10 +743,12 @@
         z-index: -1;
         transition: transform 1s;
     }
-    .shadow.show-grow{
+
+    .shadow.show-grow {
         transform-origin: 50% 20%;
-        transform: scale(1.30,.8);
+        transform: scale(1.30, .8);
     }
+
     .cube.show-front {
         transform: translateZ(-240px) rotateY(0deg);
     }
