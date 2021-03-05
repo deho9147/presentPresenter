@@ -1,9 +1,17 @@
 <body id="body" style="min-height: calc(100% - 10px);">
     <div id="lower" style="display: flex;">
         <div id="leftSide"
-            style="width:25%; min-height: 100vh; background-color: #1a1a1a; border-right: solid black 2px; padding: 0 0px 0 30px;">
+            style="width:25%; min-height: 100vh; background-color: #1a1a1a; border-right: solid black 2px; padding: 0 40px 0 30px;">
             <div>
-                <div style="font-size: 28px; color: white; margin-top: 10px;">Top Message:</div>
+                <div style="display: flex; justify-content: left; align-items: center;">
+                    <div style="font-size: 28px; color: white; margin-top: 10px; width: 200px;">Top Message</div>
+                    <div onclick="helpButton('topMessage')"
+                        style="position: relative; top:8px; user-select: none; left:-30px; border-radius: 15px; height:30px; width: 30px; border-style: solid; border-color: white; border-width: 2px; background-color:#1a1a1a; box-shadow: 1px 1px 5px black;">
+                        <div
+                            style="color: white;position: relative; top: -2px; width: 100%; display: flex; align-content: center; justify-content: center; font-size: 20px;">
+                            ?</div>
+                    </div>
+                </div>
                 <textarea id="topMessageInput" cols="30" rows="3"
                     style="margin: 20px; margin-top:10px; font-size: 20px; color: black; border-radius: 10px; resize: none; outline: none; box-shadow: 5px 5px 5px black;">Open your Gift</textarea>
             </div>
@@ -13,7 +21,7 @@
                 <div style="display: flex; font-size: 20px; margin-left: 20px; align-items: center; height: 40px;">
                     <div style="width: 55px; position: relative; top:-2px;">Box:</div>
                     <input id="boxColorPicker" type="color" onchange="setColor(this)" value="#004d00"
-                        style="width: 100px; border-radius: 10px; background-color: #2d2d2d; border-color: #2d2d2d; vertical-align: text-top; outline: none; box-shadow: 5px 5px 5px black;" />
+                        style="width: 100px; border-radius: 10px; background-color: rgb(45, 45, 45); border-color: rgb(45, 45, 45); vertical-align: text-top; outline: none; box-shadow: 5px 5px 5px black;" />
                     <div style="width: 30px;text-align: center; position: relative; top:-2px; width: 60px;">or</div>
                     <input id="boxColorHTML" type="text" onchange="setColor(this)" value="#004d00"
                         style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; outline: none; box-shadow: 5px 5px 5px black;">
@@ -21,29 +29,47 @@
                 <div style="display: flex; font-size: 20px; margin-left: 20px; align-items: center; height: 40px;">
                     <div style="width: 55px; vertical-align: 100%; position: relative; top:-2px;">Bow:</div>
                     <input id="bowColorPicker" type="color" onchange="setColor(this)" value="#ff0000"
-                        style="width: 100px; border-radius: 10px; background-color: #2d2d2d; border-color: #2d2d2d; outline: none; box-shadow: 5px 5px 5px black;" />
+                        style="width: 100px; border-radius: 10px; background-color: rgb(45, 45, 45); border-color: rgb(45, 45, 45); outline: none; box-shadow: 5px 5px 5px black;" />
                     <div style="width: 30px;text-align: center;position: relative; top:-2px; width: 60px;">or</div>
                     <input id="bowColorHTML" type="text" onchange="setColor(this)" value="#ff0000"
                         style="font-size: 20px; width: 100px; text-align: center; border-radius: 10px; outline: none; box-shadow: 5px 5px 5px black;">
                 </div>
             </div>
-            <div style="color:white; font-size:28px;">
-                <input id="createQuestionButton" type="button" onclick="createQuestion()" value="Add Question"
-                    style="font-size: 24px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 0px; box-shadow: 5px 5px 5px black;" />
-                <div id="maxQuestions" style="font-size: 20px;" hidden="true">You have reach the max amount of
+            <div style="color:white; font-size:28px; width: 100%;">
+                <div style="display: flex; justify-content: left; align-items: center; width: 100%;">
+                    <input id="createQuestionButton" type="button" onclick="createQuestion()" value="Add Question"
+                        style="font-size: 24px; border-radius: 10px; background-color: #101010; color: white; padding: 5px; padding-left: 10px; padding-right: 10px; margin: 10px; margin-left: 0px; box-shadow: 5px 5px 5px black;" />
+                    <div id="createQuestionForm"></div>
+                    <div onclick="helpButton('question')"
+                        style="position: relative; user-select: none; border-radius: 15px; height:30px; width: 30px; border-style: solid; border-color: white; border-width: 2px; background-color:#1a1a1a; box-shadow: 1px 1px 5px black;">
+                        <div
+                            style="color: white;position: relative; top: -2px; width: 100%; display: flex; align-content: center; justify-content: center; font-size: 20px;">
+                            ?</div>
+                    </div>
+                </div>
+                <div id="maxQuestions" style="font-size: 18px;" hidden="true">You have reached the max amount of
                     Questions</div>
-                <div id="createQuestionForm"></div>
                 <div id="listQuestions"
-                    style="max-height: 200px; overflow-y: auto; scrollbar-color: #2d2d2d #101010; background-color: #1a1a1a; margin-left: 20px; border-radius: 10px;">
+                    style="max-height: 200px; width: 100%; overflow-y: auto; scrollbar-color: rgb(45, 45, 45) #101010; background-color: #2d2d2d; margin: 10px 0 10px 20px; border-radius: 10px;">
                     <div id="insideQuestions"></div>
                 </div>
             </div>
             <div id="gift" style="color: white; font-size: 20px;">
-                <div style="font-size: 28px; color: white; margin: 0px 10px 0px 0;">Gift:</div>
+                <div style="display: flex; justify-content: left; align-items: center;">
+                    <div style="font-size: 28px; color: white; margin: 0px 10px 0px 0;">Gift</div>
+                    <div onclick="helpButton('gift')"
+                        style="position: relative; user-select: none; border-radius: 15px; height:30px; width: 30px; border-style: solid; border-color: white; border-width: 2px; background-color:#1a1a1a; box-shadow: 1px 1px 5px black;">
+                        <div
+                            style="color: white;position: relative; top: -2px; width: 100%; display: flex; align-content: center; justify-content: center; font-size: 20px;">
+                            ?</div>
+                    </div>
+                </div>
                 <div style="margin-left: 20px;">
-                    <input type="radio" id="useText" name="giftFormat" onchange="giftFormat(this)" value="Text" checked="checked" autocomplete="off">
+                    <input type="radio" id="useText" name="giftFormat" onchange="giftFormat(this)" value="Text"
+                        checked="checked" autocomplete="off">
                     <label for="useImage" style="margin:5px; font-size: 20px;">Text</label>
-                    <input type="radio" id="useImage" name="giftFormat" onchange="giftFormat(this)" value="Image" autocomplete="off">
+                    <input type="radio" id="useImage" name="giftFormat" onchange="giftFormat(this)" value="Image"
+                        autocomplete="off">
                     <label for="useImage" style="margin:5px;">Image</label>
                 </div>
                 <div id="giftImage" style="margin-left: 20px;" hidden="true">
@@ -97,24 +123,67 @@
             </div>
         </div>
     </div>
+    <div id="questionHelp" hidden="true"
+        style="position: absolute; top: 270px; left: 27%; width: 400px; padding: 10px; text-align:left;background-color:#1a1a1a; color: white; border-radius: 10px; font-size: 20px; border: 2px solid black; box-shadow: 10px 10px 20px 5px black;">
+        <div>When unwrapping the present by clicking the bow or tape, your question will be asked and once answered correctly the bow or tape will be removed.
+        </div>
+        <div>
+            You can add up to five questions.
+        </div>
+        <div style="width:100%; text-align:center;">
+            <input type="button" value="Hide" onclick="helpButton('question')"
+                style="font-size: 18px; width: 50px; text-align: center; border-radius: 5px; background-color: #101010; color: white; padding: 3px; margin-top: 5px; margin-left: 0px; outline: none; box-shadow: 5px 5px 5px black;"></input>
+        </div>
+    </div>
+    <div id="giftHelp" hidden="true"
+        style="position: absolute; top: 360px; left: 27%; width: 300px; padding: 10px; text-align:left;background-color:#1a1a1a; color: white; border-radius: 10px; font-size: 20px; border: 2px solid black; box-shadow: 10px 10px 20px 5px black;">
+        <div> Once the bow and pieces of tape are removed the Gift will be revealed. It can either be text or an image. You can add a hyperlink in order to link to
+            a webpage.
+        </div>
+        <div style="width:100%; text-align:center;">
+            <input type="button" value="Hide" onclick="helpButton('gift')"
+                style="font-size: 18px; width: 50px; text-align: center; border-radius: 5px; background-color: #101010; color: white; padding: 3px;  margin-top: 5px; margin-left: 0px; outline: none; box-shadow: 5px 5px 5px black;"></input>
+        </div>
+    </div>
 </body>
 <script>
     const uneditedBox = `<div id="boxStuffContainer">
         <div style="width: 100%; align-content: center; display: flex; justify-content: center;">
             <div id="topMessage"
-                style="color: white; font-size: 40px; padding-top: 40px; width: 60%; text-align: center; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+                style="color: white; background-color:rgb(45, 45, 45); border-radius: 40px; font-size: 40px; padding: 10px; margin-top: 30px; width: 60%; text-align: center; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
             </div>
         </div>
         <div class="shadowPostion" style="position: relative; width:480px; height:0px; display:flex; justify-content: center; left:calc(50% - 240px); top: 480px;">
         <div class="shadow">
         </div>
         </div>
-            <div class="scene" style="position: relative; left: calc(50% - 320px); backdrop-filter: brightness(0%);">
+        <div style="display:flex; justify-content:center; position: relative;">
+            <p class="radio-group" style="display:flex; flex-direction: column; color:white; height: 480px; justify-content: space-evenly; text-align: left; width: 100px; position: relative;">
+                <label>
+                    <input type="radio" id="radioTop" name="rotate-cube-side" value="top" checked onchange="handleChangeSide('top')" /> TOP
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="front" onchange="handleChangeSide('front')"/> FRONT
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="right" onchange="handleChangeSide('right')"/> RIGHT
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="back" onchange="handleChangeSide('back')"/> BACK
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="left" onchange="handleChangeSide('left')"/> LEFT
+                </label>
+                <label>
+                    <input type="radio" name="rotate-cube-side" value="bottom" onchange="handleChangeSide('bottom')"/> BOTTOM
+                </label>
+            </p>
+            <div class="scene" style="position: relative; left: -50px; backdrop-filter: brightness(0%);">
                 <div class="cube">
                     <div class="gift"
                         style="position: absolute; top: -120px; left: 30px; transform: rotateX(90deg); text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
                         <div id="giftZone"
-                            style="width: 420px; height: 320px; font-size: 48px; color: white; display: flex; align-items: center; justify-content: center;">
+                            style="width: 420px; height: 320px; font-size: 48px; color: white; display: flex; align-items: center; justify-content: center; border-radius: 20px;">
                         </div>
                     </div>
                     <div class="cube__face cube__face--front">
@@ -184,6 +253,11 @@
                         </div>
                     </div>
                     <div class="cube__face cube__face--top">
+                        <div id="topCrease" hidden="true" style="width:480px; border-top: 1px solid black; position: absolute; top: 240px; left: 0px; box-shadow: 0px -1px 3px 0px black, 0px 1px 3px 0px black;"></div>
+                        <div id="topTape" hidden="true"
+                            style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 180px; left:140px; top:190px;"
+                            onclick="askQuestion(this)">
+                        </div>
                         <div class="bow">
                             <div class="bowSection"
                                 style="position: relative; left: calc(50% - 60px); width: 120px; height: 179px; box-shadow:0px -3px 10px -3px black inset, 2px 0px 10px 0px black, -2px 0px 10px 0px black; clip-path: polygon(-10px 0, 130px 0, 130px 179px, -10px 179px);">
@@ -218,11 +292,7 @@
                         <div style="width:480px; border-top: 1px solid black; position: absolute; top: 240px; left: 0px; box-shadow: 0px -3px 3px 0px black;"></div>
                         </div>
                         <div class="tape"
-                            style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left:60px; top:190px;"
-                            onclick="askQuestion(this)">
-                        </div>
-                        <div class="tape"
-                            style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 120px; left: 300px; top:190px;"
+                            style="position: absolute; background: rgba(255,255,255,0.5); height:100px; width: 180px; left:150px; top:190px;"
                             onclick="askQuestion(this)">
                         </div>
                         <div class="bow">
@@ -238,30 +308,202 @@
                     </div>
                 </div>
             </div>
-            <p class="radio-group" style="color:white; width: 100%; text-align:center;">
-                <label>
-                    <input type="radio" name="rotate-cube-side" value="front" /> FRONT
-                </label>
-                <label>
-                    <input type="radio" name="rotate-cube-side" value="right" /> RIGHT
-                </label>
-                <label>
-                    <input type="radio" name="rotate-cube-side" value="back" /> BACK
-                </label>
-                <label>
-                    <input type="radio" name="rotate-cube-side" value="left" /> LEFT
-                </label>
-                <label>
-                    <input type="radio" name="rotate-cube-side" value="top" checked /> TOP
-                </label>
-                <label>
-                    <input type="radio" name="rotate-cube-side" value="bottom" /> BOTTOM
-                </label>
-            </p>
+            </div>
             <div id="question_display"
                 style="width: 100%; display:flex; align-items: center; flex-direction: column;">
             </div>
     </div>`
+</script>
+<script id="scriptDownLoad">
+    var currentClass = ""
+    function handleChangeSide(side) {
+        var cube = document.querySelector('.cube');
+        var shadow = document.querySelector('.shadow');
+        var showClass = 'show-' + side;
+        if (currentClass) {
+            cube.classList.remove(currentClass);
+            shadow.classList.remove("show-grow");
+        }
+        cube.classList.add(showClass);
+        setTimeout(function () { shadow.classList.add("show-grow"); }, 1010);
+        currentClass = showClass;
+    }
+    handleChangeSide("top");
+    var questions = passingData.questions;
+    function updateData() {
+        questions = passingData.questions;
+        questionCounter = 0;
+    }
+    var questionCounter = 0;
+
+    function askQuestion(object) {
+        if (questions[questionCounter]) {
+            if (!document.getElementById("answer_display")) {
+                var answerDisplay = document.createElement("div");
+                answerDisplay.id = "answer_display";
+                answerDisplay.style = "justify-content: center; width: 800px;"
+                var questionText = document.createElement("div");
+                questionText.textContent = questions[questionCounter].prompt;
+                questionText.style = "color: white; Font-size: 24px; padding-right: 10px; text-align: center;"
+                var hintButton = document.createElement("div");
+                hintButton.textContent = ("HINT")
+                hintButton.style = "background-color: black; color: white; font-size: 18px; padding: 2px; padding-left: 5px; padding-right: 5px; border-radius: 12px; border: solid white 2px; margin-left: 10px; line-height: 28px;"
+                hintButton.onclick = function () {
+                    if (!document.getElementById("hint_text")) {
+                        hintText = document.createElement("div");
+                        hintText.id = "hint_text";
+                        hintText.style = "color: white; font-size: 24px; width: 800px;"
+                        hintText.textContent = questions[questionCounter].hint;
+                        document.getElementById("question_display").appendChild(hintText);
+                    } else {
+                        document.getElementById("hint_text").remove();
+                    }
+                }
+                var answerInput = document.createElement("input");
+                answerInput.setAttribute("type", "text");
+                answerInput.style = "font-size: 24px; border-radius: 12px; outline: 0; padding-left: 5px; padding-right: 5px;"
+                answerInput.onchange = function () {
+                    if (answerInput.value.toLowerCase() === questions[questionCounter].answer.toLowerCase()) {
+                        object.remove();
+                        if (document.getElementById("hint_text")) {
+                            document.getElementById("hint_text").remove();
+                        }
+                        if (object.id === "bowTop") {
+                            while (document.getElementsByClassName("bow").length > 0) {
+                                document.getElementsByClassName("bow")[0].remove();
+                            }
+                        }
+                        answerDisplay.remove();
+                        questionCounter += 1;
+                        if (questionCounter == 5) {
+                            revealBox();
+                        } else if (questionCounter == 6) {
+                            document.getElementsByClassName("cube__face--top")[0].remove();
+                        }
+                    } else {
+                        alert("That wasn't the answer I was looking for");
+                    }
+                }
+                answerDisplay.appendChild(questionText);
+                var container = document.createElement("div")
+                container.appendChild(answerInput);
+                container.appendChild(hintButton);
+                container.style = "display:flex; justify-content: center; padding: 10px;"
+                answerDisplay.appendChild(container);
+                document.getElementById("question_display").appendChild(answerDisplay);
+            }
+        }
+        else {
+            object.remove();
+            questionCounter += 1;
+            if (object.id === "bowTop") {
+                while (document.getElementsByClassName("bow").length > 0) {
+                    document.getElementsByClassName("bow")[0].remove();
+                }
+            }
+            if (questionCounter == 4) {
+                revealBox();
+            } else if (questionCounter == 5) {
+                document.getElementsByClassName("cube__face--top")[0].remove();
+            }
+
+        }
+    }
+    function revealBox() {
+        for (var i = 0; i < document.getElementsByClassName("cube__face").length; i++) {
+            document.getElementsByClassName("cube__face")[i].style = "background: rgba(134, 89, 45, 1); border: black solid 2px;"
+        }
+        while (document.getElementsByClassName("creases").length > 0) {
+            var creases = document.getElementsByClassName("creases")[0]
+            creases.remove();
+        }
+        document.getElementById("topTape").hidden = false;
+        console.log(document.getElementById("topTape"));
+        document.getElementById("topCrease").hidden = false;
+    }
+    function addStyle() {
+        if (passingData.giftIsImage) {
+            if (document.getElementById("giftVal")) {
+                document.getElementById("giftVal").remove();
+            }
+            if (passingData.link != undefined && passingData.link) {
+                var link = document.createElement("a");
+                link.id = "giftVal";
+                link.href = passingData.link;
+                var image = document.createElement("img");
+                image.src = passingData.giftImage;
+                image.style = "max-height: 100%; max-width: 100%; text-align:center;"
+                link.appendChild(image);
+                document.getElementById("giftZone").appendChild(link);
+            } else {
+                var image = document.createElement("img");
+                image.id = "giftVal"
+                image.src = passingData.giftImage;
+                image.style = "max-height: 100%; max-width: 100%; text-align:center;"
+                document.getElementById("giftZone").appendChild(image);
+            }
+        } else {
+            if (document.getElementById("giftVal")) {
+                document.getElementById("giftVal").remove();
+            }
+            if (passingData.link != undefined && passingData.link) {
+                console.log("here")
+                var link = document.createElement("a");
+                link.style = "text-decoration: none; color: white; text-align:center;"
+                link.id = "giftVal";
+                link.href = passingData.link;
+                var giftText = document.createElement("div")
+                giftText.textContent = passingData.giftText;
+                link.appendChild(giftText);
+                document.getElementById("giftZone").appendChild(link);
+            } else {
+                var giftText = document.createElement("div")
+                giftText.id = "giftVal"
+                giftText.textContent = passingData.giftText;
+                giftText.style = "text-align:center;"
+                document.getElementById("giftZone").appendChild(giftText);
+            }
+        }
+        document.getElementById("topMessage").textContent = passingData.topMessage;
+        for (var i = 0; i < document.getElementsByClassName("cube__face").length; i++) {
+            document.getElementsByClassName("cube__face")[i].style.backgroundColor = passingData.boxColor;
+            document.getElementsByClassName("cube__face")[i].style.border = "solid 1px " + changeBrightness(passingData.boxColor, .3)
+            console.log(document.getElementsByClassName("cube__face")[i].style.border);
+        }
+        for (var i = 0; i < document.getElementsByClassName("bowSection").length; i++) {
+            document.getElementsByClassName("bowSection")[i].style.backgroundColor = passingData.bowColor;
+        }
+        for (var i = 0; i < document.getElementsByClassName("bowEdge").length; i++) {
+            document.getElementsByClassName("bowEdge")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
+        }
+        for (var i = 0; i < document.getElementsByClassName("bowCenter").length; i++) {
+            document.getElementsByClassName("bowCenter")[i].style.border = "solid 70px " + (passingData.bowColor);
+        }
+        for (var i = 0; i < document.getElementsByClassName("bowTail").length; i++) {
+            document.getElementsByClassName("bowTail")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
+            document.getElementsByClassName("bowTail")[i].style.backgroundColor = passingData.bowColor;
+        }
+        document.getElementById("header").style.background = "linear-gradient(45deg, " + passingData.boxColor + ",66%," + passingData.bowColor + ")";
+    }
+    function changeBrightness(h, percent) {
+        let r = 0, g = 0, b = 0;
+
+        // 3 digits
+        if (h.length == 4) {
+            r = "0x" + h[1] + h[1];
+            g = "0x" + h[2] + h[2];
+            b = "0x" + h[3] + h[3];
+
+            // 6 digits
+        } else if (h.length == 7) {
+            r = "0x" + h[1] + h[2];
+            g = "0x" + h[3] + h[4];
+            b = "0x" + h[5] + h[6];
+        }
+
+        return "rgb(" + +r * percent + "," + +g * percent + "," + b * percent + ")";
+    }
+    addStyle();
 </script>
 <script>
     var passingData = {}
@@ -294,29 +536,12 @@
         document.getElementById("downloadContent").innerHTML = uneditedBox;
         questionCounter = 0;
         passingData = { ...passingData, questions: questionList, }
+        handleChangeSide("top");
         setData();
         addStyle();
-        var cube = document.querySelector('.cube');
-        var shadow = document.querySelector('.shadow');
-        var radioGroup = document.querySelector('.radio-group');
-        var currentClass = '';
-
-        function changeSide() {
-            var checkedRadio = radioGroup.querySelector(':checked');
-            var showClass = 'show-' + checkedRadio.value;
-            if (currentClass) {
-                cube.classList.remove(currentClass);
-                shadow.classList.remove("show-grow");
-            }
-            cube.classList.add(showClass);
-            setTimeout(function () { shadow.classList.add("show-grow"); }, 1010);
-            currentClass = showClass;
-        }
-        // set initial side
-        changeSide();
-        radioGroup.addEventListener('change', changeSide);
         updateData();
     }
+    
     function createQuestion() {
         document.getElementById("createQuestionButton").hidden = true;
         var form = document.createElement("DIV");
@@ -324,29 +549,29 @@
         form.style = "margin: 5px;"
         var questionText = document.createElement("LABEL");
         questionText.setAttribute("for", "question")
-        questionText.style = "font-size:20px; color:white;"
+        questionText.style = "font-size:18px; color:white;"
         questionText.textContent = "Question: ";
         var question = document.createElement("INPUT");
         question.onkeydown = "return event.key!='Enter'";
         question.setAttribute("id", "question");
         question.setAttribute("type", "text");
-        question.style = "font-size:20px; width: 70%; border-radius: 5px; outline: none; padding: 0;"
+        question.style = "font-size:18px; width: 66%; border-radius: 5px; outline: none; padding: 0;"
         var answerText = document.createElement("LABEL");
         answerText.setAttribute("for", "answer");
-        answerText.style = "font-size:20px; color:white;";
+        answerText.style = "font-size:18px; color:white;";
         answerText.textContent = "Answer: ";
         var answer = document.createElement("INPUT");
         answer.setAttribute("id", "answer");
         answer.setAttribute("type", "text");
-        answer.style = "font-size:20px; width: 70%; border-radius: 5px; outline:none; padding: 0;"
+        answer.style = "font-size:18px; width: 66%; border-radius: 5px; outline:none; padding: 0;"
         var hintText = document.createElement("LABEL");
         hintText.setAttribute("for", "hint");
-        hintText.style = "font-size:20px; color:white;";
+        hintText.style = "font-size:18px; color:white;";
         hintText.textContent = "Hint: ";
         var hint = document.createElement("INPUT");
         hint.setAttribute("id", "hint")
         hint.setAttribute("type", "text");
-        hint.style = "font-size:20px; width: 70%; border-radius: 5px; outline: none; padding: 0;"
+        hint.style = "font-size:18px; width: 66%; border-radius: 5px; outline: none; padding: 0;"
         var submit = document.createElement("INPUT");
         submit.setAttribute("type", "submit");
         submit.setAttribute("value", "Submit");
@@ -492,216 +717,58 @@
 
         document.body.removeChild(element);
     }
+    function helpButton(helpElement) {
+        if (helpElement == "topMessage") {
+            if (document.getElementById("topMessage").style.backgroundColor != "rgb(45, 45, 45)") {
+                console.log("ehes")
+                document.getElementById("topMessage").style.backgroundColor = "rgb(45, 45, 45)"
+            } else {
+                document.getElementById("topMessage").style.backgroundColor = "rgba(255, 30, 30, 0.4)";
+            }
+        } else if (helpElement == "gift") {
+            if (!document.getElementsByClassName("cube__face--top")[0].hidden) {
+                for (var i = 0; i < document.getElementsByClassName("cube__face").length; i++) {
+                    document.getElementsByClassName("cube__face")[i].style = "background: rgba(134, 89, 45, 1); border: black solid 2px;"
+                }
+                while (document.getElementsByClassName("creases").length > 0) {
+                    var creases = document.getElementsByClassName("creases")[0]
+                    creases.remove();
+                }
+                while (document.getElementsByClassName("tape").length > 0) {
+                    console.log(document.getElementsByClassName("tape"));
+                    document.getElementsByClassName("tape")[0].remove();
+                }
+                while (document.getElementsByClassName("bow").length > 0) {
+                    document.getElementsByClassName("bow")[0].remove();
+                }
+                document.getElementsByClassName("cube__face--top")[0].hidden = true;
+                document.getElementById("giftZone").style.backgroundColor = "rgba(255, 30, 30, 0.4)";
+                document.getElementById("giftHelp").hidden = false;
+                handleChangeSide("top");
+            } else {
+                document.getElementById("giftZone").style.backgroundColor = "transparent";
+                document.getElementById("giftHelp").hidden = true;
+                console.log(document.getElementById("giftHelp"));
+                reRenderCube();
+            }
+        } else if (helpElement == "question"){
+            if (!document.getElementById("questionHelp").hidden){
+                document.getElementById("questionHelp").hidden = true;
+            } else{
+                document.getElementById("questionHelp").hidden = false;
+            }
+        }
+    }
     listQuestions();
     setData();
     reRenderCube();
     giftFormat(document.getElementById("useText"));
 </script>
-<script id="scriptDownLoad">
-    var questions = passingData.questions;
-    function updateData() {
-        questions = passingData.questions;
-        questionCounter = 0;
-    }
-    var questionCounter = 0;
-    var cube = document.querySelector('.cube');
-    var shadow = document.querySelector('.shadow');
-    var radioGroup = document.querySelector('.radio-group');
-    var currentClass = '';
-
-    function changeSide() {
-        var checkedRadio = radioGroup.querySelector(':checked');
-        var showClass = 'show-' + checkedRadio.value;
-        if (currentClass) {
-            cube.classList.remove(currentClass);
-            shadow.classList.remove("show-grow");
-        }
-        cube.classList.add(showClass);
-        setTimeout(function () { shadow.classList.add("show-grow"); }, 1010);
-        currentClass = showClass;
-    }
-    // set initial side
-    changeSide();
-    radioGroup.addEventListener('change', changeSide);
-
-    function askQuestion(object) {
-        if (questions[questionCounter]) {
-            if (!document.getElementById("answer_display")) {
-                var answerDisplay = document.createElement("div");
-                answerDisplay.id = "answer_display";
-                answerDisplay.style = "justify-content: center; width: 800px;"
-                var questionText = document.createElement("div");
-                questionText.textContent = questions[questionCounter].prompt;
-                questionText.style = "color: white; Font-size: 24px; padding-right: 10px; text-align: center;"
-                var hintButton = document.createElement("div");
-                hintButton.textContent = ("HINT")
-                hintButton.style = "background-color: black; color: white; font-size: 18px; padding: 2px; padding-left: 5px; padding-right: 5px; border-radius: 12px; border: solid white 2px; margin-left: 10px; line-height: 28px;"
-                hintButton.onclick = function () {
-                    if (!document.getElementById("hint_text")) {
-                        hintText = document.createElement("div");
-                        hintText.id = "hint_text";
-                        hintText.style = "color: white; font-size: 24px; width: 800px;"
-                        hintText.textContent = questions[questionCounter].hint;
-                        document.getElementById("question_display").appendChild(hintText);
-                    } else {
-                        document.getElementById("hint_text").remove();
-                    }
-                }
-                var answerInput = document.createElement("input");
-                answerInput.setAttribute("type", "text");
-                answerInput.style = "font-size: 24px; border-radius: 12px; outline: 0; padding-left: 5px; padding-right: 5px;"
-                answerInput.onchange = function () {
-                    if (answerInput.value.toLowerCase() === questions[questionCounter].answer.toLowerCase()) {
-                        object.remove();
-                        if (document.getElementById("hint_text")) {
-                            document.getElementById("hint_text").remove();
-                        }
-                        if (object.id === "bowTop") {
-                            while (document.getElementsByClassName("bow").length > 0) {
-                                document.getElementsByClassName("bow")[0].remove();
-                            }
-                        }
-                        answerDisplay.remove();
-                        questionCounter += 1;
-                        if (questionCounter == 5) {
-                            revealBox();
-                        } else if (questionCounter == 6) {
-                            document.getElementsByClassName("cube__face--top")[0].remove();
-                        }
-                    } else {
-                        alert("That wasn't the answer I was looking for");
-                    }
-                }
-                answerDisplay.appendChild(questionText);
-                var container = document.createElement("div")
-                container.appendChild(answerInput);
-                container.appendChild(hintButton);
-                container.style = "display:flex; justify-content: center; padding: 10px;"
-                answerDisplay.appendChild(container);
-                document.getElementById("question_display").appendChild(answerDisplay);
-            }
-        }
-        else {
-            object.remove();
-            questionCounter += 1;
-            if (object.id === "bowTop") {
-                while (document.getElementsByClassName("bow").length > 0) {
-                    document.getElementsByClassName("bow")[0].remove();
-                }
-            }
-            if (questionCounter == 5) {
-                revealBox();
-            } else if (questionCounter == 6) {
-                document.getElementsByClassName("cube__face--top")[0].remove();
-            }
-
-        }
-    }
-    function revealBox() {
-        for (var i = 0; i < document.getElementsByClassName("cube__face").length; i++) {
-            document.getElementsByClassName("cube__face")[i].style = "background: rgba(134, 89, 45, 1); border: black solid 2px;"
-        }
-        while (document.getElementsByClassName("creases").length > 0) {
-            var creases = document.getElementsByClassName("creases")[0]
-            creases.remove();
-        }
-        var divLine = document.createElement("div");
-        divLine.style = "position: absolute; height: 2px; width: 479px; background-color: black; top: 50%"
-        var packingTape = document.createElement("div");
-        packingTape.style = "position: absolute; height:100px; width: 120px; left:180px; top:190px; background: rgba(255,255,255, .5);"
-        packingTape.setAttribute("onclick", "askQuestion(this)");
-        document.getElementsByClassName("cube__face--top")[0].appendChild(divLine);
-        document.getElementsByClassName("cube__face--top")[0].appendChild(packingTape);
-    }
-    function addStyle() {
-        if (passingData.giftIsImage) {
-            if (document.getElementById("giftVal")) {
-                document.getElementById("giftVal").remove();
-            }
-            if (passingData.link != undefined && passingData.link) {
-                var link = document.createElement("a");
-                link.id = "giftVal";
-                link.href = passingData.link;
-                var image = document.createElement("img");
-                image.src = passingData.giftImage;
-                image.style = "max-height: 100%; max-width: 100%; text-align:center;"
-                link.appendChild(image);
-                document.getElementById("giftZone").appendChild(link);
-            } else {
-                var image = document.createElement("img");
-                image.id = "giftVal"
-                image.src = passingData.giftImage;
-                image.style = "max-height: 100%; max-width: 100%; text-align:center;"
-                document.getElementById("giftZone").appendChild(image);
-            }
-        } else {
-            if (document.getElementById("giftVal")) {
-                document.getElementById("giftVal").remove();
-            }
-            if (passingData.link != undefined && passingData.link) {
-                console.log("here")
-                var link = document.createElement("a");
-                link.style = "text-decoration: none; color: white; text-align:center;"
-                link.id = "giftVal";
-                link.href = passingData.link;
-                var giftText = document.createElement("div")
-                giftText.textContent = passingData.giftText;
-                link.appendChild(giftText);
-                document.getElementById("giftZone").appendChild(link);
-            } else {
-                var giftText = document.createElement("div")
-                giftText.id = "giftVal"
-                giftText.textContent = passingData.giftText;
-                giftText.style = "text-align:center;"
-                document.getElementById("giftZone").appendChild(giftText);
-            }
-        }
-        document.getElementById("topMessage").textContent = passingData.topMessage;
-        for (var i = 0; i < document.getElementsByClassName("cube__face").length; i++) {
-            document.getElementsByClassName("cube__face")[i].style.backgroundColor = passingData.boxColor;
-            document.getElementsByClassName("cube__face")[i].style.border = "solid 1px " + changeBrightness(passingData.boxColor, .3)
-            console.log(document.getElementsByClassName("cube__face")[i].style.border);
-        }
-        for (var i = 0; i < document.getElementsByClassName("bowSection").length; i++) {
-            document.getElementsByClassName("bowSection")[i].style.backgroundColor = passingData.bowColor;
-        }
-        for (var i = 0; i < document.getElementsByClassName("bowEdge").length; i++) {
-            document.getElementsByClassName("bowEdge")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
-        }
-        for (var i = 0; i < document.getElementsByClassName("bowCenter").length; i++) {
-            document.getElementsByClassName("bowCenter")[i].style.border = "solid 70px " + (passingData.bowColor);
-        }
-        for (var i = 0; i < document.getElementsByClassName("bowTail").length; i++) {
-            document.getElementsByClassName("bowTail")[i].style.border = "solid 1px " + changeBrightness(passingData.bowColor, .6);
-            document.getElementsByClassName("bowTail")[i].style.backgroundColor = passingData.bowColor;
-        }
-        document.getElementById("header").style.background = "linear-gradient(45deg, " + passingData.boxColor + ",66%," + passingData.bowColor + ")";
-    }
-    function changeBrightness(h, percent) {
-        let r = 0, g = 0, b = 0;
-
-        // 3 digits
-        if (h.length == 4) {
-            r = "0x" + h[1] + h[1];
-            g = "0x" + h[2] + h[2];
-            b = "0x" + h[3] + h[3];
-
-            // 6 digits
-        } else if (h.length == 7) {
-            r = "0x" + h[1] + h[2];
-            g = "0x" + h[3] + h[4];
-            b = "0x" + h[5] + h[6];
-        }
-
-        return "rgb(" + +r * percent + "," + +g * percent + "," + b * percent + ")";
-    }
-    addStyle();
-</script>
 <style>
 </style>
 <style id="styleDownload">
     body {
-        background-color: #2d2d2d;
+        background-color: rgb(45, 45, 45);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         height: 100%;
         margin: 0;
@@ -719,7 +786,7 @@
     .scene {
         width: 480px;
         height: 480px;
-        margin: 30px 80px 90px 80px;
+        margin: 30px 60px;
         perspective: 480px;
     }
 
@@ -737,7 +804,7 @@
         height: 160px;
         position: absolute;
         background: #0f0f0f;
-        box-shadow: inset 0px 0px 20px 45px #2d2d2d;
+        box-shadow: inset 0px 0px 20px 45px rgb(45, 45, 45);
         transform-style: preserve-3d;
         transform-origin: 50% 60%;
         z-index: -1;
@@ -783,11 +850,11 @@
         color: white;
         text-align: center;
         border-radius: 5px;
-        box-shadow: 2px 2px 10px -1px #1a1a1a;
+        box-shadow: 1px 1px 10px 0px #1a1a1a;
     }
 
     .haloing {
-        box-shadow: 0px 2px 20px -2px rgba(255, 255, 255, .025), 2px 0px 20px -2px rgba(255, 255, 255, .025), 0px -2px 20px -2px rgba(255, 255, 255, .025), -2px 0px 20px -2px rgba(255, 255, 255, .025);
+        box-shadow: 0px 1px 20px -1px rgba(255, 255, 255, .025), 1px 0px 20px -1px rgba(255, 255, 255, .025), 0px -1px 20px -1px rgba(255, 255, 255, .025), -1px 0px 20px -1px rgba(255, 255, 255, .025);
         background: radial-gradient(#111111 10%, #202020 50%, transparent 70%);
     }
 
